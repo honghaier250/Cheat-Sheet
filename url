@@ -1,0 +1,69 @@
+#
+https://markmail.org/
+
+# Binutils-Index
+https://sourceware.org/binutils/docs/binutils/
+
+https://tools.ietf.org/html/rfc5958
+
+https://blog.martinfjordvald.com/2011/04/optimizing-nginx-for-high-traffic-loads/
+
+https://www.nginx.com/blog/nginx-plus-sizing-guide-how-we-tested/
+
+https://www.nginx.com/blog/testing-the-performance-of-nginx-and-nginx-plus-web-servers/
+
+https://www.nginx.com/blog/inside-nginx-how-we-designed-for-performance-scale/
+
+http://www.nowamagic.net/academy/part/23/352/
+
+http://www.360doc.com/content/13/0307/16/6161903_269891933.shtml
+
+https://www.cnblogs.com/cobbliu/p/3655204.html
+
+http://linuxperf.com/?p=156
+
+# Linux IO模式及 select、poll、epoll详解
+https://segmentfault.com/a/1190000003063859
+
+# Linux IO流程
+http://blog.csdn.net/weixin_35921178/article/details/52733764
+
+# Linux网络编程--epoll模型之LT触发模式和ET触发模式
+http://blog.csdn.net/hnlyyk/article/details/50946194
+
+# sendfile:Linux中的"零拷贝"
+https://www.cnblogs.com/pengdonglin137/articles/7995528.html
+
+
+https://www.ibm.com/developerworks/cn/linux/l-cache/index.html
+http://blog.csdn.net/arkblue/article/details/45791235
+
+# 深入理解Linux TCP backlog
+https://www.jianshu.com/p/7fde92785056
+
+http://jaseywang.me/2014/07/20/tcp-queue-%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/
+
+https://stackoverflow.com/questions/36466744/use-of-recv-q-and-send-q
+
+https://stackoverflow.com/questions/23862410/invalid-argument-setting-key-net-core-somaxconn
+
+https://www.nginx.com/blog/tuning-nginx/
+
+https://security.stackexchange.com/questions/38269/how-can-i-interpret-openssl-speed-output
+
+# 联系前方实施获取
+uptime/sar tcp
+
+https://www.kernel.org/doc/Documentation/iostats.txt
+
+http://ykrocku.github.io/blog/2014/04/11/diskstats/
+
+https://github.com/apache/incubator-pagespeed-ngx/issues/693
+
+http://blog.51cto.com/changer/1285387
+
+https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how-why-are-they-special/4178176#4178176
+
+http://blog.think-async.com/
+
+https://www.boost.org/doc/libs/1_67_0/libs/beast/doc/html/beast/examples.html

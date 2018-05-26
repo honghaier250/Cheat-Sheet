@@ -1,0 +1,9 @@
+http://backreference.org/2010/05/09/ocsp-verification-with-openssl/
+
+# OCSP REQUEST METHOD BY POST or GET
+http://unmitigatedrisk.com/?p=42
+
+# rfc
+https://www.ietf.org/rfc/rfc2560.txt
+
+openssl ocsp -issuer level1.crt -nonce -CAfile CAbundle.crt -url http://ocsp.digicert.com/ -serial "0x${l0serial}" -verify_other level1.crt -text

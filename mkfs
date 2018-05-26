@@ -1,0 +1,2 @@
+# Format usb
+mkfs.vfat /deb/usb

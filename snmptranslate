@@ -1,0 +1,4 @@
+http://blog.csdn.net/gaoming655/article/details/7463934
+
+snmptranslate -Ts | grep -i "diskIO"
+snmptranslate -Ts | grep -i "sensor"

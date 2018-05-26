@@ -1,0 +1,9 @@
+# update
+sudo add-apt-repository ppa:mozillateam/firefox-next
+
+# local directory
+/usr/lib/firefox/browser
+
+about:config
+about:config?filter=extensions.screenshot
+

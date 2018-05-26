@@ -1,0 +1,4 @@
+# String
+http://www.softpanorama.org/Scripting/Shellorama/String_operations/index.shtml
+
+for i in $(seq 1 30);do kssl s_client -connect 192.168.192.7:443 &;done

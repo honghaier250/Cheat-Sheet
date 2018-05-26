@@ -1,0 +1,4 @@
+# Parse a file skipping commented lines
+egrep '^[^#]' /etc/manpath.config
+
+#

@@ -1,0 +1,32 @@
+# Convert a man page to pdf
+man -t bash | ps2pdf - bash.pdf
+# View the ascii chart
+
+man 7 ascii
+
+# View tcp
+man 7 tcp
+
+# view ip
+man 7 ip
+
+# View arp
+man 7 arp
+
+# View socket
+man 7 socket
+
+# View proc
+man 5 proc
+
+# View elf
+man elf
+
+# View term
+man 5 terminfo
+
+# View tcpdump
+man tcpdump
+
+# View packet filter expression
+man 7 pcap-filter

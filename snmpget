@@ -1,0 +1,1 @@
+nmpget -v1 -c public 192.168.49.253 BREEZECOM-DOT11EXT-MIB::roamQuality.1

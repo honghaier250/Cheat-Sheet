@@ -1,0 +1,2 @@
+# Set proxy
+w3m -o HTTPS_PROXY='http://127.0.0.1:38251'  https://www.google.com.hk/

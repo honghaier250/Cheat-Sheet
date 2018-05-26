@@ -1,0 +1,15 @@
+# Download
+https://nginx.org/packages/
+http://nginx.org/download/
+
+# debug configure
+daemon off;
+master_process off;
+
+https://www.scalyr.com/community/guides/an-in-depth-guide-to-nginx-metrics
+https://www.datadoghq.com/blog/how-to-collect-nginx-metrics/
+https://docs.nginx.com/nginx/admin-guide/security-controls/securing-http-traffic-upstream/
+https://stackoverflow.com/questions/20224142/nginx-http-status-module-statistics
+https://trac.nginx.org/nginx/browser/nginx/src/http/modules/ngx_http_status_module.c?rev=74477ea8074f818ebdec5d9f56c21247c99ecaaa
+https://blog.serverdensity.com/monitor-nginx/
+https://zhuanlan.zhihu.com/p/34050716

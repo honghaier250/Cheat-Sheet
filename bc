@@ -1,0 +1,11 @@
+# Ten to hex
+echo "obase=10;ibase=16;A0" | bc
+echo "obase=16;ibase=10;10" | bc
+
+# Ten to binary
+echo "obase=2;ibase=10;100" | bc
+
+# Decimal
+scale=5
+
+echo 'obase=16;ibase=16;C06D1000-C06A5E78' | bc

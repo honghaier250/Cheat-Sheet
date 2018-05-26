@@ -1,0 +1,27 @@
+sudo apt-get remove --purge -y libreoffice*
+sudo apt-get install -y vim
+sudo apt-get install -y git
+sudo apt-get install -y w3m
+sudo apt-get install -y tmux
+sudo apt-get install -y cgdb
+sudo apt-get install -y tree
+sudo apt-get install -y nmap
+sudo apt-get install -y trash-cli
+sudo apt-get install -y goldendict
+sudo apt-get install -y openssh-server
+sudo apt-get install -y silversearcher-ag
+sudo apt-get install -y cifs-utils
+sudo apt-get install -y p7zip-full
+sudo apt-get install -y fcitx-table-wbpy
+sudo apt-get install -y python-pip
+sudo pip install cheat
+sudo apt-get install -y wireshark
+sudo apt-get install -y blogilo
+sudo apt-get install -y zsh --force-yes
+sudo apt-get install -y albert
+sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+sudo apt-get remove -y unity-webapps-common
+sudo apt-get autoremove -y
+
+http://meldmerge.org/

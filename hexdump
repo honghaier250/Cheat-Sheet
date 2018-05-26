@@ -1,0 +1,2 @@
+# One-byte character display
+hexdump -C pubkey.bin

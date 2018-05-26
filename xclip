@@ -1,0 +1,1 @@
+cat io_test| xclip -selection clipboard

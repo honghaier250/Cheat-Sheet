@@ -1,0 +1,2 @@
+# verbose mode
+make -n

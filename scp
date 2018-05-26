@@ -1,0 +1,8 @@
+# To copy a file from your local machine to a remote server:
+scp foo.txt user@example.com:remote/dir
+
+# To copy a file from a remote server to your local machine:
+scp user@example.com:remote/dir/foo.txt local/dir
+
+# Special characters
+scp honghaier@192.168.80.195:"/media/honghaier/0EB44F9E65744050/fakepath/ssl_patch/6.1.4\\ patch/SSL6.1.4_SP12_HA_Virtual_Router_Id.171031_103821.z说明.txt" ./

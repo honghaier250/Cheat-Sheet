@@ -1,0 +1,9 @@
+# Disk
+lspci -vvv -d '8086:3c2a'
+
+# Ethernet
+lspci -vvv -d '8086:1521'
+
+# Cavium
+lspci -vvv -d '177d:0010'
+lspci -n | grep -E "10b5:8624|10b5:9056"

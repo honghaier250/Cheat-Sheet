@@ -1,0 +1,11 @@
+# Add
+sudo add-apt-repository ppa:hzwhuang/ss-qt5
+
+# Remove
+sudo add-apt-repository --remove  ppa:hzwhuang/ss-qt5
+
+# vim
+sudo add-apt-repository ppa:jonathonf/vim
+
+# albert
+sudo add-apt-repository ppa:flexiondotorg/albert

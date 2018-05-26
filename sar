@@ -1,0 +1,22 @@
+# all
+sar -A -f /var/log/sysstat/sa23
+
+# cpu
+sar -u -f /var/log/sysstat/sa23
+
+# memory
+sar -r -f /var/log/sysstat/sa23
+
+# page switch
+sar -W -f /var/log/sysstat/sa23
+
+# koal
+sar -k CUSTOM -f /var/log/sysstat/sa23
+sar -k PROCESS -f /var/log/sysstat/sa23
+
+# sar -d 1
+ls -l /dev | awk '$5=="8," && $6=="16"'
+
+# socket
+date; uptime; date --date='15 minutes ago' +"%H:%M:%S";
+sar -n SOCK -s $(date --date='15 minutes ago' +"%H:%M:%S") -e $(date +"%H:%M:%S")
