@@ -29,3 +29,6 @@ sudo dmidecode -t 2 | grep -i "Product Name" | awk -F':' '{print $2}'
 
 # 6.1.4 SP3
 # SSL6.1.4SP3升级包，建议在init的内核文件中将非系统启动必须的驱动都去掉
+# openssl tls1.3
+# 有SM2加密卡的情况下，NRP服务启动时判断是否启用（lspci）了该加密卡，若未启用则不能启动NRP服务（目的是证明服务用到了SM2加密卡）
+# 4.9内核下支持drop_cache(向前兼容4.9内核)

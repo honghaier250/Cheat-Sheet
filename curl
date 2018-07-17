@@ -60,3 +60,6 @@ curl -vk -1 https://192.168.80.199/ https://192.168.80.199/login.php
 
 # Socks5 Proxy
 curl -x socks5h://127.0.0.1:1080 -kv https://solarianprogrammer.com
+
+# Verify Client Certificate
+curl -kvl --cert mysite.pem --key mysite.key https://mail.koal.com/

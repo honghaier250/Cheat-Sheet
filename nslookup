@@ -1,0 +1,2 @@
+# Query by specific dns server
+nslookup mail.koal.com 10.0.1.9

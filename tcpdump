@@ -1,3 +1,7 @@
+# TCPDUMP FILTERS
+# https://staff.washington.edu/dittrich/talks/core02/tools/tcpdump-filters.txt
+# https://github.com/SergK/cheatsheat-tcpdump/blob/master/tcpdump_advanced_filters.txt
+#
 # TCPDump is a packet analyzer. It allows the user to intercept and display TCP/IP
 # and other packets being transmitted or received over a network. (cf Wikipedia).
 # Note: 173.194.40.120 => google.com
@@ -77,10 +81,13 @@ tcpdump -i en0 -A -n -e -s0 'tcp[(tcp[12]>>2):4] = 0x47455420'
 tcpdump -i en0 -A -n -e -s0 'tcp[(tcp[12]>>2):4] = 0x504f5354'
 
 # Rotates the dump file every rotate_seconds seconds
-tcpdump -i any -A -n -s0 'host ( 192.168.192.7 or 192.168.193.7 ) and ( portrange 443-444 or port 80 )' -G 15 -W 1 -w capture.pcap
+tcpdump -i any -A -n -s0 'host ( 192.168.192.7 or 192.168.193.7 ) and ( portrange 443-444 or port 80 )' -z gzip -G 15 -W 1 -C 1024 -w %H%M%S.pcap
 
 # 网卡支付
 tcpdump -i any -A -n -s0 'host ( 10.2.165.113 or 10.2.188.129 ) and portrange (1437-1440 or 80-80)' -w capture.pcap
 
 # 信用卡申请
 tcpdump -i any -A -n -s0 'host ( 10.2.165.137 or 192.168.193.1 ) and portrange 80-443' -w capture.pcap
+
+# filter by tcp frame data for wireshark
+tcp and frame contains 15:01:01:00:02:02

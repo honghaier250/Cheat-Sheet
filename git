@@ -153,10 +153,11 @@ git tag -d v0.0.0.1
 git show v0.0.0.1
 git push origin v0.0.0.1
 
-gst | grep -ri "类型变更" | awk  '{print $2}' | xargs git checkout  --
-gst | grep -ri "删除" | awk  '{print $2}' | xargs git rm
+gst | grep -i "类型变更" | awk  '{print $2}' | xargs git checkout  --
+gst | grep -i "删除" | awk  '{print $2}' | xargs git rm
+gst | grep -i "修改" | awk  '{print $2}' | xargs git checkout  --
 
-gst | grep -ri "modified" | awk  '{print $3}' | xargs git checkout  --
-gst | grep -ri "deleted" | awk  '{print $3}' | xargs git checkout  --
-gst | grep -ri "typechange" | awk  '{print $3}' | xargs git checkout  --
+gst | grep -i "modified" | awk  '{print $3}' | xargs git checkout  --
+gst | grep -i "deleted" | awk  '{print $3}' | xargs git checkout  --
+gst | grep -i "typechange" | awk  '{print $3}' | xargs git checkout  --
 gst | awk  '{print $2}' | xargs /bin/rm -rf

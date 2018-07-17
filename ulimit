@@ -1,0 +1,11 @@
+# Core Dump
+# echo "1" > /proc/sys/kernel/core_uses_pid
+# echo "/corefile/core-%s-%e-%p-%t" > /proc/sys/kernel/core_pattern
+# echo "00000033" > /proc/PID/coredump_filter
+
+# Hard limit
+ulimit -c unlimited
+
+# Soft limit
+ulimit -c unlimited -S
+

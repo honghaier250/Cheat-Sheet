@@ -15,3 +15,6 @@ rsync -auv /src/foo/ /dest/foo
 
 # Only sync destination folder existing files
 rsync --existing -avzhe 'ssh -p 60022' ssl@192.168.80.199:/kssl/ /home/ssl/workspace/upgrade/SSL6.1.4_SP3/SSL6.1.4_SP3/kssl
+
+# Replace scp
+rsync --rsh=ssh --partial --progress honghaier@10.0.80.195:/home/honghaier/Tools/vagrant/linux/debian/ssl6/ssl6-dev/ssl6-dev.box ./

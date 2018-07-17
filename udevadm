@@ -1,0 +1,2 @@
+# Get serial number of usb device
+udevadm info --query=all --name=/dev/sdd1 | grep -i "serial"

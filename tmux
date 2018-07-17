@@ -41,6 +41,7 @@ Ctrl-b c
 Ctrl-b x
 
 # Switch between windows:
+#
 Ctrl-b [0-9]
 or
 Ctrl-b Arrows
@@ -70,4 +71,11 @@ Ctrl-L 清屏，相当于clear命令
 Ctrl-R 进入历史命令查找状态，然后你输入几个关键字符，就可以找到你使用过的命令
 Ctrl-P 相当于上箭头键，即显示上一个命令
 Ctrl-N 相当于下箭头键，即显示下一个命令
+
+# synchronize panes
+setw synchronize-panes on
+
+# swap window
+swap-window -t -1
+swap-window -t +1
 

@@ -29,3 +29,6 @@ top -o <key>
 
 # Output into a file
 top -n 1 -b > file.txt
+
+# NRP
+top -p `pidof NRPd | tr " " ","`

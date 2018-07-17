@@ -13,3 +13,6 @@ cmake -DPYTHON_EXECUTABLE:FILEPATH="/usr/local/tools/python-3.3/bin/python3" -DP
 
 # cflags
 cmake -DCMAKE_CXX_FLAGS:STRING='-I/usr/local/tools/clang-6.0/include/c++/v1/'
+
+# specify openssl
+cmake -DOPENSSL_ROOT_DIR='' -DOPENSSL_LIBRARIES=''

@@ -48,3 +48,6 @@ sudo start-stop-daemon --start --quiet --oknodo --pidfile /tmp/sshd-remote.pid -
 # Tunnel
 ssh -L 60022:192.168.80.197:22 root@192.168.80.197
 scp -P 60022 NRPHelper.php root@192.168.192.1:~/
+
+# Tail remote log
+ssh -p 60022 ssl@10.0.109.123 tail -100f /var/log/NRP/1/access.log

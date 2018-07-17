@@ -1,3 +1,6 @@
+# Display the ELF file header
+readelf -h string.o
+
 # program headers
 readelf -l string.o
 
@@ -10,3 +13,6 @@ readelf -s string.o
 # Section content
 readelf -p SectionName string.o
 readelf -x SectionName string.o
+
+# Find source file name from executable
+readelf -s string.o | grep FILE

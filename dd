@@ -34,3 +34,6 @@ time dd if=/dev/zero of=test bs=4k count=10000 oflag=dsync
 
 # io sync when final
 time dd if=/dev/zero of=test bs=4k count=10000 conv=fsync
+
+dd if=/dev/zero of=1MB bs=1MB count=1
+dd if=/dev/zero of=1KB bs=1KB count=1

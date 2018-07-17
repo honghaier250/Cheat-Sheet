@@ -1,3 +1,6 @@
+# List VM
+VBoxManage list vms -l | grep "Name:  "
+
 # CPU
 VBoxManage modifyvm "sag6.1.4" --x2apic off
 
@@ -40,6 +43,7 @@ VBoxManage modifyvm ssl6-dev --macaddress5 080027BBA4A3
 
 # modify disk serial
 VBoxManage setextradata ssl5.2.4 "VBoxInternal/Devices/piix3ide/0/Config/PrimaryMaster/SerialNumber" "string:00000000000000000001"
+VBoxManage setextradata ssl6-dev "VBoxInternal/Devices/ahci/0/Config/Port0/SerialNumber" "string:00000000000000000001"
 
 # start vm
 VBoxManage startvm "ssl5.2.4"

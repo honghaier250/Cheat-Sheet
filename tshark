@@ -21,3 +21,9 @@ tshark -i eth6 -f 'tcp port 80 or tcp port 443' -V -Y "http.request || http.resp
 
 # Just http header and body
 tshark -i eth6 -V -Y "tcp.port ==80 && (http.request || http.response)" | awk "/Hypertext Transfer Protocol/,/Frame/ { print  };/Transmission Control Protocol/{print};/Internet Protocol/{print}" | grep -v Frame
+
+# Http
+sudo tshark -i any -f 'tcp port 61001' -Y 'http.request || http.response' -V
+
+# tshark with rotating capture files
+sudo tshark -a filesize:10000 -b files:20 -i < INTERFACE > -w < BASE_FILE_NAME.pcapng >

@@ -1,0 +1,3 @@
+# The number fo CPU core
+getconf _NPROCESSORS_CONF
+getconf _NPROCESSORS_ONLN

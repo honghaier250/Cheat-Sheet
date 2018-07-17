@@ -67,3 +67,22 @@ https://stackoverflow.com/questions/4178175/what-are-aggregates-and-pods-and-how
 http://blog.think-async.com/
 
 https://www.boost.org/doc/libs/1_67_0/libs/beast/doc/html/beast/examples.html
+
+http://engineering.chartbeat.com/2014/01/02/part-1-lessons-learned-tuning-tcp-and-nginx-in-ec2/
+
+https://www.digitalocean.com/community/tutorials/understanding-the-nginx-configuration-file-structure-and-configuration-contexts
+
+https://www.performancevision.com/blog/diagnose-tcp-connection-setup-issues/
+
+
+cpu cache
+https://medium.com/@minimarcel/effect-of-cpu-caches-57db81490a7f
+https://lwn.net/Articles/252125/
+https://stackoverflow.com/questions/3928995/how-do-cache-lines-work
+https://software.intel.com/en-us/blogs/2007/11/30/volatile-almost-useless-for-multi-threaded-programming
+
+
+https://github.com/youerning/blog/tree/master/locust-test
+
+# Linux 系统调用 open 七日游
+https://blog.csdn.net/jsw_4/article/details/41865661

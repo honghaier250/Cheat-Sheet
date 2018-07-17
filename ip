@@ -1,3 +1,6 @@
+# ipv6
+https://networklessons.com/ipv6/how-to-find-ipv6-prefix/
+
 # Display all interfaces with addresses
 ip addr
 
@@ -38,3 +41,6 @@ ip link set dev eth1 arp off && ip link set dev eth1 arp on
 # tun/tap
 ip tuntap add mode tun tun0
 ip link set dev tun0 up
+
+# running ipv6
+https://books.google.com/books?id=UuIqKlWVaKcC&pg=PA45&lpg=PA45&dq=netstat++-A+inet6+-nrC&source=bl&ots=2_XRXsF18z&sig=K0Ix8OQv0uKFDvKfNkEoAbKGkjA&hl=en&sa=X&ved=0ahUKEwiWopPMh6PcAhUFVN8KHbjUBHUQ6AEITjAH#v=onepage&q&f=false
