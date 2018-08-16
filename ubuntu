@@ -19,6 +19,10 @@ sudo apt-get install -y wireshark
 sudo apt-get install -y blogilo
 sudo apt-get install -y zsh --force-yes
 sudo apt-get install -y albert
+sudo apt-get install -y tsocks
+sudo pip install shadowsocks
+sudo apt-get install -y libsodium-dev
+sudo apt install -y gnome-sushi
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
 sudo apt-get remove -y unity-webapps-common

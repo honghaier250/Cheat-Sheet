@@ -6,3 +6,6 @@ sudo dmidecode | grep -A 6 -i ipmi
 
 # cpu cache
 sudo dmidecode -t cache
+
+# processor/system/bios
+sudo dmidecode -s processor-manufacturer

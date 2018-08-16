@@ -79,3 +79,6 @@ setw synchronize-panes on
 swap-window -t -1
 swap-window -t +1
 
+# restore window size
+tmux detach-client -t /dev/pts/X
+

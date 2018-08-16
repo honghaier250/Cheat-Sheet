@@ -1,2 +1,35 @@
 # network performance tuning
 https://www.korekontrol.eu/blog/linux-network-performance-tuning
+
+# UML Linux
+https://gist.github.com/gaoyifan/d38559fd50dd8a01ec8ed1fb4c0ab614
+sudo apt-get install user-mode-linux
+sudo apt-get install uml-utilities
+
+## Build from source
+export ARCH=um
+make defconfig ARCH=um
+make ARCH=um
+
+## Make Rootfs
+http://uk.images.linuxcontainers.org/images/ubuntu/trusty/amd64/default/20180808_07:42/rootfs.tar.xz
+
+## Start UML
+sudo /home/honghaier/Workspaces/linux-4.9/linux rw ubda=/home/honghaier/Workspaces/linux-4.9/rootfs umid=uml eth0=tuntap,,,192.168.0.254 mem=512M
+
+## ShareFile
+sudo mount none /mnt/uml/ -t hostfs -o /mnt/
+
+## Network
+sudo iptables -I FORWARD -d 192.168.0.253 -j ACCEPT
+sudo iptables -I FORWARD -s 192.168.0.253 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o eth6 -j MASQUERADE
+
+## Debug
+handle SIGSEGV pass nostop noprint
+handle SIGUSR1 pass nostop noprint
+
+# IPVS
+# http://www.linuxvirtualserver.org/zh/lvs1.html
+https://blog.csdn.net/tycoon1988/article/details/40786921
+http://blog.51cto.com/atong/1347895

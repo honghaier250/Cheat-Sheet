@@ -3,6 +3,7 @@ kill -15 <process id>
 
 # Kill a process forcefully
 kill -9 <process id>
+kill -9 1 2 3
 
 # Kill zombie process
 kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')
