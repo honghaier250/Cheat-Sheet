@@ -9,3 +9,18 @@ sudo add-apt-repository ppa:jonathonf/vim
 
 # albert
 sudo add-apt-repository ppa:flexiondotorg/albert
+
+# wireshark
+sudo add-apt-repository ppa:wireshark-dev/stable
+
+#
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+# libsodium
+sudo add-apt-repository ppa:chris-lea/libsodium
+
+# chrome
+sudo add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
+
+# tun2socks
+sudo add-apt-repository ppa:hda-me/badvpn-tun2socks

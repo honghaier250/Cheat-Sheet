@@ -125,3 +125,5 @@ http://valloric.github.io/YouCompleteMe/#user-guide
 
 set textwidth=1024
 
+# write with sudo
+:w !sudo tee %

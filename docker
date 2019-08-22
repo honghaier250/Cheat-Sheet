@@ -1,3 +1,4 @@
+# [Configure Docker to use a proxy server](https://docs.docker.com/network/proxy/)
 # Start docker daemon
 docker -d
 
@@ -37,6 +38,17 @@ docker run --rm -it -v "$PWD":/output -v ~/.ssh:/root/.ssh --tmpfs /tmp -e ISSUE
 # make ssl6 patch
 sudo docker run --rm -it -v "$PWD":/output -v ~/.ssh:/root/.ssh --tmpfs /tmp -e ISSUE_DATE="2017-12" -e PACKAGE_NAME="SSL6.1.4_SP2_SNMP" git.koal.com:4567/gw-server/docker/build-upgrade-package
 
-sudo docker run --name ghostunnel -p 1234:1234 -p 6060:6060 -v /home/honghaier/Tools/docker/linux/ubuntu/ghostunnel/:/test-keys/:ro -it squareup/ghostunnel  client --listen localhost:1234  --target 192.168.109.123:443  --status 0.0.0.0:6060 --disable-authentication --keystore /test-keys/hehj2.pfx --storepass="hehj" --cacert /test-keys/KoalRootCA.pem
-
+# aria2
 sudo docker run -d --name aria2-with-webui -p 6800:6800 -p 6880:80 -v ~/Downloads:/data -e PGID=1000 -e PUID=1000 abcminiuser/docker-aria2-with-webui:latest-ng
+
+# koal
+sudo docker login git.koal.com:4567
+
+# push image
+sudo docker push git.koal.com:4567/gw-cloud/docker/trp:runit-amd64-v2
+
+# rename image
+sudo docker tag git.koal.com:4567/gw-cloud/docker/trp:runit-amd64 git.koal.com:4567/gw-cloud/docker/trp:runit-amd64-v2
+
+# rename container
+sudo docker rename xxx xxx1

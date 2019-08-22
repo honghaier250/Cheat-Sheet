@@ -25,3 +25,9 @@ ncat -l 8080 0<2way | ncat 192.168.1.200 80 1>2way
 
 # Port forwarding
 ncat -u -l  80 -c  'ncat -u -l 8080'
+
+# Echo server
+nc -e /bin/cat -l -p 8001
+
+# Tunnel test
+nc 10.0.80.158 443 < tunnel.req

@@ -55,3 +55,12 @@ find . -type d  | awk -F/ '{print $3}' | xargs mkdir
 # clear log
 find /var/log -type f -name "dmesg" -o -name "messages" -o -name "*.1" -o -name "*.log" -exec cp /dev/null {} \;
 find /var/log -type f -name '*.[0-99].gz' -o -name "*.1" -o -name "*.0" -exec /bin/rm -rf {} +
+find /var/log -type f -name '*.[0-99].gz' -o -name "*.1" -o -name "*.0" | xargs rm -rf
+find /basedir -type f -name '*.txt' -exec grep -l 'foobar[0-9]*' {} +
+find /basedir -type f -name '*.txt' -exec sed -i 's/foo/bar/g' {} +
+find /basedir -type f -name '*.txt' -exec sh -c 'some code here' sh {} +
+
+#
+find . ! -name file10.txt -delete
+
+find /kssl -user root

@@ -1,4 +1,5 @@
 # List VM
+VBoxManage list runningvms
 VBoxManage list vms -l | grep "Name:  "
 
 # CPU
@@ -59,3 +60,6 @@ VBoxManage modifyvm "ie8.win7.x86" --clipboard bidirectional
 
 # usb
 sudo usermod -aG vboxusers honghaier
+
+# delete vm
+VBoxManage unregistervm --delete calite6.5.13

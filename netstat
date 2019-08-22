@@ -1,4 +1,5 @@
 # WARNING ! netstat is deprecated. Look below.
+# Timer https://plantegg.github.io/2017/08/28/netstat%20--timer/
 
 # To view which users/processes are listening to which ports:
 sudo netstat -lnptu
@@ -18,17 +19,20 @@ sudo netstat -vtlnp --listening -4
 # Replace it by:
 ss
 
-# For netstat-r
+# For netstat -r
 ip route
 
 # For netstat -i
 ip -s link
 
-# For netstat-g
+# For netstat -g
 ip maddr
 
-# view tcp connection
+# Tcp connection statistics
 netstat -nat | awk '{print $6}' | sort | uniq -c | sort -rn
 
-# view head 20 tcp connection on 80 port
+# Head 20 tcp connection on 80 port
 netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -c|sort -nr|head -n20
+
+# ListenOverFlows/ListenDrops
+netstat -s -e | grep -i "listen"

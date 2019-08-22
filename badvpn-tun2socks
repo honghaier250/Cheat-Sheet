@@ -1,0 +1,4 @@
+# [tun2socks](https://github.com/ambrop72/badvpn/wiki/Tun2socks)
+sudo ip tuntap add dev tun0 mode tun user root
+sudo ifconfig tun0 10.0.0.1 netmask 255.255.255.0
+badvpn-tun2socks --tundev tun0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 127.0.0.1:1080

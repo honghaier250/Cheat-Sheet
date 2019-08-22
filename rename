@@ -1,0 +1,11 @@
+# Lowercase all files and folders in current directory
+rename 'y/A-Z/a-z/' *
+
+# 替换文件名中特定字段
+rename "s/AA/aa/" *
+
+# 修改文件后缀
+rename "s/.png/.jpg/" *
+
+# 批量添加文件后缀
+rename "s/$/.txt/" *

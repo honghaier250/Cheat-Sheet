@@ -1,0 +1,9 @@
+[Advanced Firewall Configurations with ipset](https://www.linuxjournal.com/content/advanced-firewall-configurations-ipset)
+[ipset-persistent](https://selivan.github.io/2018/07/27/ipset-save-with-ufw-and-iptables-persistent-and.html)
+
+sudo ipset create forward hash:ip
+sudo ipset add forward 10.0.80.200
+sudo ipset destroy forward
+
+sudo iptables -A FORWARD -m set --match-set forward src -j ACCEPT
+sudo iptables -A FORWARD -m set --match-set forward dst -j ACCEPT

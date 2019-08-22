@@ -1,3 +1,11 @@
+# example
+# [NAT64](https://blog.csdn.net/zhangjie1989/article/details/51464251)
+# [IPv6实验](http://www.yeslab.net/newsinfo/597716.html?templateId=1133604)
+https://yurisk.info/2016/12/19/linux-ip-route-command-reference-by-example/index.html
+
+# policy route
+https://doc.lagout.org/network/inetdoc/Policy_Routing_in_Linux_ENG.pdf
+
 # ipv6
 https://networklessons.com/ipv6/how-to-find-ipv6-prefix/
 
@@ -12,6 +20,7 @@ ip addr add 192.168.1.100/32 dev eth0
 
 # Remove a IP from an interface
 ip addr del 192.168.1.100/32 dev eth0
+ip -6 addr flush scope global dev eth0
 
 # Remove all IPs from an interface
 ip address flush dev eth0
@@ -33,7 +42,7 @@ ip route add 192.168.0.0/24 dev eth0
 ip link set dev eth0 address aa:bb:cc:dd:ee:ff
 
 # View neighbors (using ARP and NDP)
-ip neighbor show
+ip -s neighbor show
 
 # delete incomplete arp entry
 ip link set dev eth1 arp off && ip link set dev eth1 arp on
@@ -42,5 +51,45 @@ ip link set dev eth1 arp off && ip link set dev eth1 arp on
 ip tuntap add mode tun tun0
 ip link set dev tun0 up
 
+# tcp_metrics
+ip tcp_metrics show
+
 # running ipv6
 https://books.google.com/books?id=UuIqKlWVaKcC&pg=PA45&lpg=PA45&dq=netstat++-A+inet6+-nrC&source=bl&ots=2_XRXsF18z&sig=K0Ix8OQv0uKFDvKfNkEoAbKGkjA&hl=en&sa=X&ved=0ahUKEwiWopPMh6PcAhUFVN8KHbjUBHUQ6AEITjAH#v=onepage&q&f=false
+
+# bridge
+sudo ip link add name br0 type bridge
+sudo ip link set dev br0 up
+
+sudo ip link set dev eth0 promisc on
+sudo ip link set dev eth0 up
+
+sudo ip link set dev eth0 master br0
+sudo ip link set dev eth0 nomaster
+sudo ip link delete br0 type bridge
+
+# encrypt package
+sudo ip xfrm policy add src 10.0.80.199 dst 10.0.80.195 proto udp dir in tmpl proto esp mode transport
+sudo ip xfrm policy add src 10.0.80.195 dst 10.0.80.199 proto udp dir out tmpl proto esp mode transport
+sudo ip xfrm state add src 10.0.80.199 dst 10.0.80.195 proto esp spi 0x6e082415 mode transport auth sha256 0x97144264cfb2e0e3de378d3b3192678bca45e88fbebc29cbdc91ef0f39ca1de7 enc aes 0x01c74551c2172d40b689c4595daad1d7f44bd480998277042d74974e2fef97b1
+sudo ip xfrm state add src 10.0.80.195 dst 10.0.80.199 proto esp spi 0x6e082415 mode transport auth sha256 0x97144264cfb2e0e3de378d3b3192678bca45e88fbebc29cbdc91ef0f39ca1de7 enc aes 0x01c74551c2172d40b689c4595daad1d7f44bd480998277042d74974e2fef97b1
+
+sudo ip xfrm policy add src 10.0.80.195 dst 10.0.80.199 proto udp dir in tmpl proto esp mode transport
+sudo ip xfrm policy add src 10.0.80.199 dst 10.0.80.195 proto udp dir out tmpl proto esp mode transport
+sudo ip xfrm state add src 10.0.80.199 dst 10.0.80.195 proto esp spi 0x6e082415 mode transport auth sha256 0x97144264cfb2e0e3de378d3b3192678bca45e88fbebc29cbdc91ef0f39ca1de7 enc aes 0x01c74551c2172d40b689c4595daad1d7f44bd480998277042d74974e2fef97b1
+sudo ip xfrm state add src 10.0.80.195 dst 10.0.80.199 proto esp spi 0x6e082415 mode transport auth sha256 0x97144264cfb2e0e3de378d3b3192678bca45e88fbebc29cbdc91ef0f39ca1de7 enc aes 0x01c74551c2172d40b689c4595daad1d7f44bd480998277042d74974e2fef97b1
+
+# [ipsec](https://gist.github.com/vishvananda/7094676)
+#
+# udp tunnel
+sudo ip fou add port 5555 ipproto 4
+sudo ip link add name tun0 type ipip remote 10.0.80.199 local 10.0.80.195 ttl 225 encap fou encap-sport 5555 encap-dport 6666
+sudo ip addr add 192.168.2.2 peer 192.168.2.3 dev tun0
+sudo ip link set tun0 up
+
+sudo ip fou add port 6666 ipproto 4
+sudo ip link add name tun0 type ipip remote 10.0.80.195 local 10.0.80.199 ttl 225 encap fou encap-sport 6666 encap-dport 5555
+sudo ip addr add 192.168.2.3 peer 192.168.2.2 dev tun0
+sudo ip link set tun0 up
+
+# [vrf-tutorial](https://static.sched.com/hosted_files/ossna2017/fe/vrf-tutorial-oss.pdf)

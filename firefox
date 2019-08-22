@@ -7,3 +7,5 @@ sudo add-apt-repository ppa:mozillateam/firefox-next
 about:config
 about:config?filter=extensions.screenshot
 
+# tsocks w3m https://developer.mozilla.org/en-US/docs/Mozilla/Projects/NSS/Key_Log_Format
+export SSLKEYLOGFILE=~/tmp/keylog.txt

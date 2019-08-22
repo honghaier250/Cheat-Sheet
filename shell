@@ -1,4 +1,16 @@
+# [Linux命令大全搜索工具](https://www.bookstack.cn/read/linux-command/README.md)
 # String
 http://www.softpanorama.org/Scripting/Shellorama/String_operations/index.shtml
 
 for i in $(seq 1 30);do kssl s_client -connect 192.168.192.7:443 &;done
+
+# TCP
+1.首先重定向，建立连接：
+exec 6>/dev/tcp/192.168.2.2/1234
+2.然后关闭：
+exec 6>&-
+3.其它
+在关闭之前，你可以使用下面的命令来向该连接发送数据：
+echo -e "$data" >&6
+在关闭之前，你可以使用下面的命令来读取该连接返回的数据：
+cat <&6

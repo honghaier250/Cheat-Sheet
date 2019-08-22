@@ -1,3 +1,4 @@
+# an -k KEYWORD / apropos KEYWORD / help KEYWORD
 # Convert a man page to pdf
 man -t bash | ps2pdf - bash.pdf
 
@@ -42,3 +43,9 @@ man 7 netdevice
 
 # View signal
 man 7 signal
+
+# View sysfs
+man 5 sysfs
+
+man iptables-extensions
+man xtables-addons

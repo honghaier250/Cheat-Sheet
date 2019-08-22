@@ -1,0 +1,2 @@
+do-release-upgrade
+sudo update-manager -d

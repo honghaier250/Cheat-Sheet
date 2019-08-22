@@ -6,20 +6,33 @@ sudo apt-get install -y tmux
 sudo apt-get install -y cgdb
 sudo apt-get install -y tree
 sudo apt-get install -y nmap
+sudo apt-get install -y xclip
 sudo apt-get install -y trash-cli
 sudo apt-get install -y goldendict
 sudo apt-get install -y openssh-server
 sudo apt-get install -y silversearcher-ag
 sudo apt-get install -y cifs-utils
+sudo apt-get install -y deepin-screenshot
 sudo apt-get install -y p7zip-full
+sudo apt-get install -y pavucontrol
 sudo apt-get install -y fcitx-table-wbpy
 sudo apt-get install -y python-pip
-sudo pip install cheat
 sudo apt-get install -y wireshark
 sudo apt-get install -y blogilo
 sudo apt-get install -y zsh --force-yes
 sudo apt-get install -y albert
+sudo apt-get install -y tsocks
+sudo apt-get install -y tig
+sudo apt-get install -y iptables-persistent
+sudo apt-get install -y libsodium-dev
+sudo apt-get install -y gnome-sushi
+sudo apt-get install -y fd-find
+sudo apt-get install -y translate-shell
+sudo apt-get install -y privoxy
+sudo pip install cheat
+sudo pip install shadowsocks
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+tsocks wget https://typora.io/linux/linux/typora_0.9.54_amd64.deb
 
 sudo apt-get remove -y unity-webapps-common
 sudo apt-get autoremove -y

@@ -1,2 +1,84 @@
+# [stack-rx](https://ylgrgyq.github.io/2017/07/23/linux-receive-packet-1/)
 # network performance tuning
 https://www.korekontrol.eu/blog/linux-network-performance-tuning
+
+# UML Linux
+https://gist.github.com/gaoyifan/d38559fd50dd8a01ec8ed1fb4c0ab614
+sudo apt-get install user-mode-linux
+sudo apt-get install uml-utilities
+
+## Build from source
+# Patch for libc2.27 https://lore.kernel.org/patchwork/patch/851352/
+export ARCH=um
+make defconfig ARCH=um
+make ARCH=um
+
+## Make Rootfs
+http://uk.images.linuxcontainers.org/images/ubuntu/trusty/amd64/default/20180808_07:42/rootfs.tar.xz
+sudo debootstrap bionic mnt
+
+## Start UML
+sudo /home/honghaier/Workspaces/linux-4.9/linux rw ubda=/home/honghaier/Workspaces/linux-4.9/rootfs umid=uml eth0=tuntap,,,192.168.0.254 mem=512M
+
+## ShareFile
+sudo mount none /mnt/uml/ -t hostfs -o /mnt/
+
+## Network
+### UML
+ip link set eth0 up
+### Host
+sudo sysctl -w 'net.ipv4.conf.tap0.proxy_arp=1'
+sudo route add -net 192.168.1.253/24 dev tap0
+sudo iptables -I FORWARD -d 192.168.0.253 -j ACCEPT
+sudo iptables -I FORWARD -s 192.168.0.253 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
+
+## Debug
+handle SIGSEGV pass nostop noprint
+handle SIGUSR1 pass nostop noprint
+handle SIGALRM pass nostop noprint
+b net_write
+
+# IPVS
+# http://www.linuxvirtualserver.org/zh/lvs1.html
+https://blog.csdn.net/tycoon1988/article/details/40786921
+http://blog.51cto.com/atong/1347895
+
+# ip tunnel
+http://www.opstool.com/article/183
+https://github.com/lxin/lxin.github.io/blob/master/_posts/2014-04-05-ip_tunnel-architecture.md
+
+- host A
+```
+sudo ip tunnel add a2b mode ipip remote 10.0.80.195 local 10.0.109.228
+sudo ifconfig a2b 192.168.2.1 netmask 255.255.255.0 up
+route add -net 10.0.0.0/24 gw 10.0.109.254
+route add default gw 192.168.2.2
+```
+
+- host B
+```
+sudo ip tunnel add a2b mode ipip remote 10.0.109.228 local 10.0.80.195
+sudo ifconfig a2b 192.168.2.2 netmask 255.255.255.0 up
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo iptables -A FORWARD -d 192.168.2.1 -j ACCEPT
+sudo iptables -A FORWARD -s 192.168.2.1 -j ACCEPT
+sudo iptables -t nat -A POSTROUTING -o enp1s0 -j MASQUERADE
+```
+# KGdb https://haryachyy.wordpress.com/2016/08/27/debug-linux-device-driver/
+git://kernel.ubuntu.com/ubuntu/ubuntu-bionic.git
+
+# bridge
+https://segmentfault.com/a/1190000009491002
+https://github.com/beacer/notes/blob/master/kernel/bridging.md
+
+# bonding
+https://www.tecmint.com/configure-network-bonding-teaming-in-ubuntu/
+
+# conntrack
+https://blog.csdn.net/lickylin/article/category/1587127/2
+
+# tun/tap
+https://blog.csdn.net/sinat_20184565/article/details/83415106
+
+

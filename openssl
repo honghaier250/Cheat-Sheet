@@ -1,3 +1,5 @@
+# [OpenSSLWiki](https://wiki.openssl.org/index.php/Main_Page)
+# [manually-testing-ssl-tls-weaknesses](https://www.contextis.com/en/blog/manually-testing-ssl-tls-weaknesses)
 # User Agent Capabilities
 https://www.ssllabs.com/ssltest/clients.html
 
@@ -166,3 +168,5 @@ openssl s_client -showcerts -connect shipit.ubuntu.com:443 < /dev/null | \
 awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++}
              inc {print > ("level" c ".crt")}
              /---END CERTIFICATE-----/{inc=0}'
+
+ -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
