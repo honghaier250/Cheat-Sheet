@@ -50,7 +50,7 @@ curl -v -H "PO: UrlEncode=YES" -H "PU: CN=%ba%d8%ba%ec%bd%dc" -H "PR: granularit
 curl -X POST -d '{"encoded_string": "429982218.55413.0000"}' http://api.techietek.com/v1/f5/cookie/decode
 
 # flow statistic
-curl -v -w '%{size_request} %{size_header} %{size_download}' http://127.0.0.1:65520/status
+curl -v -w '%{size_request} %{size_upload} %{size_header} %{size_download}' http://127.0.0.1:65520/status
 
 # compressed
 curl -vk -1 --compressed https://192.168.80.199/login.php
@@ -67,5 +67,12 @@ curl -kvl --cert mysite.pem --key mysite.key https://mail.koal.com/
 # Get internet ip
 curl ipinfo.io
 
-# 
+# Speedtest
+curl -s dl.getipaddr.net/speedtest.sh
+#
 curl -w "Connection Time: %{time_connect}\n First Byte Transfer: %{time_starttransfer}\n Download Time: %{time_total} (sec)\n Download Speed: %{speed_download} (bps)\n" http://10.0.1.8/
+
+curl -6 -g -0 --interface fd82:b34f:cc99:0:64d3:d0cd:c577:cd90 -vkl https://\[fd82:b34f:cc99:0:a00:27ff:fe8a:5093\]/
+
+# get internet ip address
+curl -L tool.lu/ip

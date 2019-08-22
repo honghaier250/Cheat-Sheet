@@ -1,0 +1,6 @@
+# broadcast mac
+arping -B -S 10.0.80.195
+arping -b -s 10.0.80.195 -I enp1s0 255.255.255.255
+
+# unicast mac
+arping -s 10.0.80.254 -I enp1s0 10.0.80.200

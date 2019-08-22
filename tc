@@ -1,0 +1,56 @@
+# [Linux 的网络资源隔离](https://toutiao.io/posts/lpkg13/preview)
+# [流量控制工具TC详细说明](http://www.ituring.com.cn/article/274014)
+# [简单使用](http://www.ituring.com.cn/article/274015)
+sudo tc qdisc add dev eth0 root netem
+sudo tc qdisc change dev eth0 root netem duplicate 20%
+sudo tc qdisc change dev eth0 root netem corrupt 1%
+sudo tc qdisc change dev eth0 root netem loss 30%
+sudo tc qdisc change dev eth0 root netem delay 100ms 2000ms
+sudo tc qdisc change dev eth0 root netem delay 100ms reorder 25% 50%
+sudo tc qdisc change dev eth0 root netem delay 100ms 20000ms loss 30% duplicate 20%
+sudo tc qdisc add dev eth0 root netem delay 100ms 20000ms 10% loss 10% duplicate 10%
+
+# https://github.com/thombashi/tcconfig
+tc qdisc add dev eth2 root handle 1: htb default 20
+tc class add dev eth2 parent 1: classid 1:1 htb rate 512kbit prio 5
+tc class add dev eth2 parent 1:1 classid 1:10 htb rate 204kbit ceil 486kbit prio 1
+tc class add dev eth2 parent 1:1 classid 1:20 htb rate 204kbit ceil 486kbit prio 2
+tc class add dev eth2 parent 1:1 classid 1:30 htb rate 102kbit ceil 460kbit prio 3
+tc qdisc add dev eth2 parent 1:10 handle 10: sfq perturb 10 quantum 6000
+tc qdisc add dev eth2 parent 1:20 handle 20: sfq perturb 10 quantum 6000
+tc qdisc add dev eth2 parent 1:30 handle 30: sfq perturb 10 quantum 6000
+tc filter add dev eth2 parent 1: protocol ip prio 10 u32 match ip tos 0x10 0xff flowid 1:10
+tc filter add dev eth2 parent 1: protocol ip prio 11 u32 match ip protocol 1 0xff flowid 1:10
+tc filter add dev eth2 parent 1: protocol ip prio 12 u32 match ip protocol 6 0xff match u8 0x05 0x0f at 0 match u16 0x0000 0xffc0 at 2 flowid 1:10
+tc filter add dev eth2 parent 1: protocol ip prio 16 u32 match ip src 80 flowid 1:30
+tc filter add dev eth2 parent 1: protocol ip prio 18 u32 match ip dst 0.0.0.0/0 flowid 1:20
+
+# sudo tcset enp1s0 --rate 100Kbps --delay 100ms --loss 0.1 --network 192.168.0.10 --port 80
+tc qdisc add dev enp1s0 root handle 1736: htb default 1
+tc class add dev enp1s0 parent 1736: classid 1736:1 htb rate 100000kbit
+tc class add dev enp1s0 parent 1736: classid 1736:2 htb rate 100.0Kbit ceil 100.0Kbit burst 1.25KB cburst 1.25KB
+tc qdisc add dev enp1s0 parent 1736:2 handle 2f22: netem loss 0.100000% delay 100.000000ms
+tc filter add dev enp1s0 protocol ip parent 1736: prio 2 u32 match ip dst 192.168.0.10/32 match ip src 0.0.0.0/0 match ip dport 80 0xffff flowid 1736:2
+
+modprobe ifb numifbs=1
+ip link set dev ifb0 up
+tc qdisc add dev eth2 handle ffff: ingress
+tc filter add dev eth2 parent ffff: protocol ip u32 match u32 0 0 action mirred egress redirect dev ifb0
+
+tc qdisc add dev ifb0 root handle 2: htb
+tc class add dev ifb0 parent 2: classid 2:1 htb rate 1024kbit
+tc filter add dev ifb0 protocol ip parent 2: prio 1 u32 match ip src 0.0.0.0/0 flowid 2:1
+
+# mirror packets from eth0 to eth1
+tc qdisc add dev eth0 ingress
+tc filter add dev eth0 parent ffff: protocol all prio 2 u32 match u32 0 0 flowid 1:1 action mirred egress mirror dev eth1
+
+tc qdisc replace dev eth0 parent root handle 10: prio
+tc filter add dev eth0 parent 10: protocol all prio 2 u32 match u32 0 0 flowid 10:1 action mirred egress mirror dev eth1
+
+# stateless nat
+tc qdisc add dev eth2 ingress handle ffff
+tc filter add dev eth2 parent ffff: protocol ip prio 10 u32 match ip dst 192.168.99.10 action nat ingress 192.168.99.10 172.16.0.11
+
+tc qdisc add dev eth0 root handle 10: htb
+tc filter add dev eth0 parent 10: protocol ip prio 10 u32 match ip src 172.16.0.11 match ip sport 53 action nat egress 172.16.0.11 192.168.99.10

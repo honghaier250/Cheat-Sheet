@@ -28,3 +28,9 @@ sudo ip addr list eth0 | grep -i "inet " | awk '{print $2}' | awk -F/ '{print $1
 
 # format print
 printf '1 2 3' | awk '{printf ("%s", $3)}'
+
+# n lines before the match
+awk -v n=1 '/foobar/ && NR>n {print window[(NR-n)%n]}{window[NR%n]=$0}' file.txt
+
+# n lines after the match
+awk -v n=1 '/foobar/{queue[NR+n]} NR in queue' file.txt

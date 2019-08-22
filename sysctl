@@ -1,2 +1,9 @@
+# [Ipsysctl tutorial 1.0.4](https://www.frozentux.net/ipsysctl-tutorial/chunkyhtml/index.html)
+# list
+sudo sysctl -a --pattern forward
+
 # update
 sudo sysctl -w  net.inet.ip.forwarding=1
+
+# nat for lo
+sudo sysctl -w net.ipv4.conf.eth0.route_localnet=1

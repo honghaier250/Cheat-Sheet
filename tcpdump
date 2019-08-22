@@ -1,3 +1,9 @@
+# [WireEdit](https://wireedit.com/)
+# [SendIP](https://www-x.antd.nist.gov/ipv6/sendip.html)
+# [ostinato](https://ostinato.org/)
+# [Scapy](https://scapy.readthedocs.io/en/latest/introduction.html#about-scapy)
+# [Tools for creating TCP/IP packets](http://linuxpoison.blogspot.com/2008/10/tools-for-creating-tcpip-packets.html)
+# [tcpreplay](https://www.bookstack.cn/read/linux-command/command-tcpreplay.md)
 # TCPDUMP FILTERS
 # https://staff.washington.edu/dittrich/talks/core02/tools/tcpdump-filters.txt
 # https://github.com/SergK/cheatsheat-tcpdump/blob/master/tcpdump_advanced_filters.txt
@@ -91,3 +97,8 @@ tcpdump -i any -A -n -s0 'host ( 10.2.165.137 or 192.168.193.1 ) and portrange 8
 
 # filter by tcp frame data for wireshark
 tcp and frame contains 15:01:01:00:02:02
+
+# http 502 response
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20353032)'
+
+sudo tcpdump -i any -A -n -s0 'host 10.0.1.60 and port 80 and (tcp[(tcp[12]>>2):4] = 0x47455420) and (tcp[((tcp[12]>>2)+8):4] = 0x7257656c)'

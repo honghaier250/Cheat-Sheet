@@ -8,7 +8,7 @@ dpkg -P test.deb
 dpkg -I
 
 # Find out if a Debian package is installed or not
-dpkg -s test.deb | grep Status
+dpkg -s test.deb
 
 # Find out cp belong to which package
 dpkg -S `which cp`

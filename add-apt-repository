@@ -21,3 +21,6 @@ sudo add-apt-repository ppa:chris-lea/libsodium
 
 # chrome
 sudo add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
+
+# tun2socks
+sudo add-apt-repository ppa:hda-me/badvpn-tun2socks

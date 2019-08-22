@@ -1,2 +1,23 @@
-# Change the speed and duplex settings
+# change the speed and duplex settings
 ethtool -s eth0 speed 100 duplex full
+
+# light specify interface
+ethtool --identify eth0 20
+
+# interrupt coalescing
+sudo ethtool -c eth0
+
+# statistics
+sudo ethtool -S eth0
+
+# rx/tx queue
+sudo ethtool -l eth0
+
+# rx/tx queue size
+sudo ethtool -g eth0
+
+# features
+sudo ethtool -k eth0
+
+# timestamp modes
+sudo ethtool -T enp1s0

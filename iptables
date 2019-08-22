@@ -1,8 +1,10 @@
+# https://github.com/trimstray/iptables-essentials
+# [iptables-tutorial](http://www.cs.unibo.it/~ghini/didattica/sistemimobili/25021-Iptables_Tutorial_1.2.pdf)
+# [/proc/sys/net/netfilter/nf_conntrack_](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt)
 # Show hit for rules with auto refresh
 watch --interval 0 'iptables -nvL | grep -v "0     0"'
 
-# Show hit for rule with auto refresh and highlight any changes since the last refresh
-watch -d -n 2 iptables -nvL
+# Show hit for rule with auto refresh and highlight any changes since the last refresh watch -d -n 2 iptables -nvL
 
 # Block the port 902 and we hide this port from nmap.
 iptables -A INPUT -i eth0 -p tcp --dport 902 -j REJECT --reject-with icmp-port-unreachable
@@ -41,3 +43,35 @@ iptables -I INPUT {LINE_NUMBER} -i eth1 -p tcp --dport 21 -s 123.123.123.123 -j 
 
 # iptables restore
 iptables-restore -c < /etc/iptables-save
+
+# drop specify package
+sudo iptables -A INPUT -p tcp --tcp-flags ACK,FIN FIN,ACK -j DROP
+sudo iptables -A INPUT -p tcp --tcp-flags ALL ACK -j DROP
+
+# random drop
+iptables -A INPUT -m statistic --mode random -j DROP
+
+# redirect
+iptables -t nat -I PREROUTING --src $SRC_IP_MASK --dst $DST_IP -p tcp --dport $portNumber -j REDIRECT --to-ports $rediectPort
+
+# recent
+iptables -A INPUT -i eth1 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+iptables -A INPUT -i eth1 -p tcp -m multiport --dports 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 --rttl --name SSH --rsource -j DROP
+iptables -A INPUT -i eth1 -p tcp -m multiport --dports 22 -m conntrack --ctstate NEW -m recent --set --name SSH --rsource -j ACCEPT
+
+# log to /var/log/messages
+iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j LOG --log-prefix "IP_SPOOF A: "
+
+# trace
+sudo iptables -t raw -A OUTPUT -p icmp -j TRACE
+
+# port mirroring
+sudo iptables -t mangle -A PREROUTING -j TEE --gateway 10.0.80.199
+sudo iptables -t mangle -A POSTROUTING -j TEE --gateway 10.0.80.199
+
+# netmap
+sudo iptables -t nat -A PREROUTING -d 1.2.3.0/24 -j NETMAP --to 5.6.7.0/24
+sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j NETMAP --to 192.168.1.200
+
+# load balancing
+https://scalingo.com/articles/2018/04/20/iptables.html

@@ -21,3 +21,9 @@ https://www.myway5.com/index.php/2017/05/19/cpp11-implement-cross-platform-timer
 
 # web
 https://blog.csdn.net/column/details/first.html
+
+# w3c
+http://www.runoob.com/cplusplus/cpp-files-streams.html
+
+# C++ template declarations vs. definitions
+http://warp.povusers.org/programming/template_declarations.html

@@ -7,3 +7,7 @@ kill -9 1 2 3
 
 # Kill zombie process
 kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')
+
+# Pause/Resume a process
+kill -SIGSTOP `pgrep crond`
+kill -SIGCONT `pgrep crond`

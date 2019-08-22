@@ -1,3 +1,4 @@
+# [Debugging with gdb](https://www.eecs.umich.edu/courses/eecs373/readings/Debugger.pdf)
 # start the debugger
 gdb your-executable
 

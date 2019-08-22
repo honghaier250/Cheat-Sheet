@@ -9,3 +9,6 @@ sudo dmidecode -t cache
 
 # processor/system/bios
 sudo dmidecode -s processor-manufacturer
+
+# memory
+dmidecode --type 17

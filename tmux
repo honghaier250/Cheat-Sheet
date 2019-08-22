@@ -82,3 +82,5 @@ swap-window -t +1
 # restore window size
 tmux detach-client -t /dev/pts/X
 
+tmux list-client
+tmux detach-client -s ssl
