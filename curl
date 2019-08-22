@@ -63,3 +63,5 @@ curl -x socks5h://127.0.0.1:1080 -kv https://solarianprogrammer.com
 
 # Verify Client Certificate
 curl -kvl --cert mysite.pem --key mysite.key https://mail.koal.com/
+
+curl -m 5  --speed-time 5 --speed-limit 1

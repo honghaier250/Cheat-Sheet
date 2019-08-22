@@ -74,11 +74,35 @@ tcpdump -i en0 'ip[0] & 0x0f > 5'
 # ip fragment
 tcpdump -i en0 '((ip[6:2] > 0) and (not ip[6] = 64))'
 
-# http get
+# http request
+# get method
 tcpdump -i en0 -A -n -e -s0 'tcp[32:4]=0x47455420'
 tcpdump -i en0 -A -n -e -s0 'tcp[(tcp[12]>>2):4] = 0x47455420'
-# http post
+# post method
 tcpdump -i en0 -A -n -e -s0 'tcp[(tcp[12]>>2):4] = 0x504f5354'
+
+# http response
+# 400 Bad Request
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343030)'
+# 403 Forbidden
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343033)'
+# 404 Not Found
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343034)'
+# 405 Method Not Allowed
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343035)'
+# 408 Request Timeout
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343038)'
+# 413 Payload Too Large
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343133)'
+# 414 URI Too Long
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20343134)'
+# 500 Internal Server Error
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20353030)'
+# 502 Bad Gateway
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20353032)'
+# 503 Service Unavailable
+sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20353033)'
+
 
 # Rotates the dump file every rotate_seconds seconds
 tcpdump -i any -A -n -s0 'host ( 192.168.192.7 or 192.168.193.7 ) and ( portrange 443-444 or port 80 )' -z gzip -G 15 -W 1 -C 1024 -w %H%M%S.pcap

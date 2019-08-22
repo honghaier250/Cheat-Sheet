@@ -1,2 +1,5 @@
 # One-byte character display
 hexdump -C pubkey.bin
+
+# specify char hex
+echo "HTTP/1.1 404 Not Found " | hexdump -C
