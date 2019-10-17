@@ -11,5 +11,5 @@ find -name *.pdf | xargs -I{} rm -rf '{}'
 
 find -name *.pdf | xargs -I{} -n1 echo '&{}='
 
-# cp
+# cp with find
 find -name *.pdf | xargs -I{} cp {} ./

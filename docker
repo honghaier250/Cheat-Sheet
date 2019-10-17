@@ -1,4 +1,5 @@
 # [Configure Docker to use a proxy server](https://docs.docker.com/network/proxy/)
+# [Shrunk Docker Image](https://blog.yadutaf.fr/2015/04/25/how-i-shrunk-a-docker-image-by-98-8-featuring-fanotify/)
 # Start docker daemon
 docker -d
 
@@ -52,3 +53,8 @@ sudo docker tag git.koal.com:4567/gw-cloud/docker/trp:runit-amd64 git.koal.com:4
 
 # rename container
 sudo docker rename xxx xxx1
+
+sudo docker run --env HTTP_PROXY="https://10.0.80.195:8118" x11docker/deepin
+
+# restart on boot
+sudo docker run --restart=always

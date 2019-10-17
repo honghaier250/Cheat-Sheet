@@ -6,6 +6,7 @@ rename "s/AA/aa/" *
 
 # 修改文件后缀
 rename "s/.png/.jpg/" *
+rename -n 's/\.old/.save/' *
 
 # 批量添加文件后缀
 rename "s/$/.txt/" *

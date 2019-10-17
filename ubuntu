@@ -15,7 +15,8 @@ sudo apt-get install -y cifs-utils
 sudo apt-get install -y deepin-screenshot
 sudo apt-get install -y p7zip-full
 sudo apt-get install -y pavucontrol
-sudo apt-get install -y fcitx-table-wbpy
+#sudo apt-get install -y fcitx-table-wbpy
+sudo apt-get install -y ibus-rime librime-data-wubi
 sudo apt-get install -y python-pip
 sudo apt-get install -y wireshark
 sudo apt-get install -y blogilo

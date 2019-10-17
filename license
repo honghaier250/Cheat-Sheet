@@ -1,3 +1,19 @@
 # uuid
 license -s -d uuid
 license -s -d bios
+
+lic.version             C0
+lic.serial              085D565D11635F5644412043554D1B6A1A120752
+lic.purpose             LicenseTest
+lic.valid-start         2019-10-12
+lic.valid-end           2019-10-14
+lic.devtype             SAG-3200
+srv.nrp                 yes
+net.bonding             no
+net.vrrp                no
+net.cluster             no
+srv.hrp                 no
+srv.pms                 no
+srv.vpn                 no
+
+curl --basic --user ssl_deploy:K0a120110601v6 -k -F licfile=@lic.txt https://ssl.koal.com/deploy/SSL/license-sign.php > license.conf

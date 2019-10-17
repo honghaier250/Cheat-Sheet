@@ -78,3 +78,6 @@ curl -m 5  --speed-time 5 --speed-limit 1
 curl -w "Connection Time: %{time_connect}\n First Byte Transfer: %{time_starttransfer}\n Download Time: %{time_total} (sec)\n Download Speed: %{speed_download} (bps)\n" http://10.0.1.8/
 
 curl -6 -g -0 --interface fd82:b34f:cc99:0:64d3:d0cd:c577:cd90 -vkl https://\[fd82:b34f:cc99:0:a00:27ff:fe8a:5093\]/
+
+# POST with a data file
+curl -d "@data.json" -X POST http://localhost:3000/data

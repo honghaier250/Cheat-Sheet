@@ -93,3 +93,4 @@ sudo ip addr add 192.168.2.3 peer 192.168.2.2 dev tun0
 sudo ip link set tun0 up
 
 # [vrf-tutorial](https://static.sched.com/hosted_files/ossna2017/fe/vrf-tutorial-oss.pdf)
+# [why vrf](https://cumulusnetworks.com/blog/vrf-for-linux/)

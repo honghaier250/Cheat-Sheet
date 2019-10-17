@@ -1,6 +1,7 @@
 # https://github.com/trimstray/iptables-essentials
 # [iptables-tutorial](http://www.cs.unibo.it/~ghini/didattica/sistemimobili/25021-Iptables_Tutorial_1.2.pdf)
 # [/proc/sys/net/netfilter/nf_conntrack_](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt)
+# [netfilter](http://inai.de/images/nf-packet-flow.png)
 # Show hit for rules with auto refresh
 watch --interval 0 'iptables -nvL | grep -v "0     0"'
 
@@ -68,6 +69,7 @@ iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j LOG --log-prefix "IP_SPOOF A: "
 
 # trace
 sudo iptables -t raw -A OUTPUT -p icmp -j TRACE
+sudo iptables -t raw -A PREROUTING -p icmp -j TRACE
 
 # port mirroring
 sudo iptables -t mangle -A PREROUTING -j TEE --gateway 10.0.80.199

@@ -2,3 +2,9 @@
 sudo ip tuntap add dev tun0 mode tun user root
 sudo ifconfig tun0 10.0.0.1 netmask 255.255.255.0
 badvpn-tun2socks --tundev tun0 --netif-ipaddr 10.0.0.2 --netif-netmask 255.255.255.0 --socks-server-addr 127.0.0.1:1080
+
+sudo iptables -A PREROUTING -t mangle -p tcp -s 192.168.1.207 -j MARK --set-mark 3
+sudo ip rule add fwmark 3 table 3
+sudo ip route add default via 10.0.0.2 dev tun0 table 3
+
+sudo sysctl -w net.ipv4.conf.all.rp_filter=0
