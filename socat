@@ -1,2 +1,8 @@
 - [Socat-fu lesson](https://www.pentestpartners.com/security-blog/socat-fu-lesson/)
 - [tips & tricks](https://gist.github.com/fsodogandji/8521333)
+
+socat -v tcp4-listen:9000,reuseaddr,fork ssl:39.107.109.176:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.88.170.160:22"
+
+socat -v tcp4-listen:9000,reuseaddr,fork exec:'/usr/local/ssl/bin/openssl s_client -connect 10.0.80.195\:50443'
+socat -v tcp4-listen:9000,reuseaddr,fork exec:'/usr/local/ssl/bin/openssl s_client -connect 39.107.109.176\:34402 -cert client.pem -key client.key -servername "tcp://127.0.0.1:22"'
+socat tcp4-listen:9000,reuseaddr,fork exec:'openssl s_client -connect sso.avic.com\:34402 -cert client.pem -key client.key -servername "tcp://10.129.81.247:22"'

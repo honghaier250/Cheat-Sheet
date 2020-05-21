@@ -1,3 +1,4 @@
+# [23 tar Command Examples For Linux](https://www.rootusers.com/23-tar-command-examples-for-linux/)
 # To extract an uncompressed archive:
 tar -xvf /path/to/foo.tar
 
@@ -32,3 +33,6 @@ tar -J ... -> tar -Ipixz ...
 
 # To exclude something files
 tar -jcvf HRP.tar.xz HRP/ --exclude .git --exclude *.o
+
+# To delete file
+tar -f  local_cert_chain.tar --delete conf/mysite.pem

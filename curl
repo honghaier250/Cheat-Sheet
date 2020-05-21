@@ -81,3 +81,22 @@ curl -6 -g -0 --interface fd82:b34f:cc99:0:64d3:d0cd:c577:cd90 -vkl https://\[fd
 
 # POST with a data file
 curl -d "@data.json" -X POST http://localhost:3000/data
+
+# SpeedTest
+curl -w "@curl-format.txt" -o /dev/null -s "http://39.106.23.16:8082/100k"
+
+
+```curl-format.txt
+    time_namelookup:  %{time_namelookup}\n
+       time_connect:  %{time_connect}\n
+    time_appconnect:  %{time_appconnect}\n
+   time_pretransfer:  %{time_pretransfer}\n
+      time_redirect:  %{time_redirect}\n
+ time_starttransfer:  %{time_starttransfer}\n
+                    ----------\n
+         time_total:  %{time_total}\n
+```
+
+# Unix Domain Socket
+curl -vkl --unix-socket /var/run/http.sock https://localhost/
+

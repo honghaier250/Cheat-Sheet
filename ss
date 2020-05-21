@@ -56,3 +56,5 @@ $ ss -nt dport \< :100
 $ sudo ss -nt state connected dport = :80
 
 ss -nt src 10.0.80.199:443
+
+ss -np -t state established '( dst :8080 )' | wc -l

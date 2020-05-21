@@ -32,6 +32,7 @@ sudo apt-get install -y translate-shell
 sudo apt-get install -y privoxy
 sudo pip install cheat
 sudo pip install shadowsocks
+sudo pip3 install thefuck
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 tsocks wget https://typora.io/linux/linux/typora_0.9.54_amd64.deb
 

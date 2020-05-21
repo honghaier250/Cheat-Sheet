@@ -56,3 +56,5 @@ set $name=value
 set target-async 1
 set pagination off
 set non-stop on
+
+break 439 if $_memeq(cmd->name->data,"ssl_verify_client",17)

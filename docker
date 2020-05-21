@@ -58,3 +58,5 @@ sudo docker run --env HTTP_PROXY="https://10.0.80.195:8118" x11docker/deepin
 
 # restart on boot
 sudo docker run --restart=always
+
+docker images | awk '{print $3}' | xargs docker image rm

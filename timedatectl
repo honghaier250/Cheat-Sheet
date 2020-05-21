@@ -1,0 +1,11 @@
+# Getting Current Date, Time and Timezone
+timedatectl
+
+# Enable/Disable Time Synchronization
+sudo timedatectl set-ntp off
+
+# Show all Available Timezones
+timedatectl list-timezones
+
+# Change Timezone
+sudo timedatectl set-timezone Europe/Bratislava
