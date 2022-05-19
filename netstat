@@ -36,3 +36,4 @@ netstat -anlp|grep 80|grep tcp|awk '{print $5}'|awk -F: '{print $1}'|sort|uniq -
 
 # ListenOverFlows/ListenDrops
 netstat -s -e | grep -i "listen"
+netstat -s | grep socket

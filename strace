@@ -1,0 +1,8 @@
+[Decoding information from the strace output](https://www.geeksforgeeks.org/decoding-information-from-the-strace-output/)
+strace -P precious.txt -efault=unlink:retval=0 unlink precious.txt
+
+strace -e trace=open,read,write,network -p pid
+
+sudo strace -r -f -e trace=file ping www.baidu.com
+sudo strace -r -f -e trace=process ping www.baidu.com
+sudo strace -r -f -e trace=network ping www.baidu.com

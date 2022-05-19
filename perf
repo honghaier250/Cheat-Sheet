@@ -1,16 +1,52 @@
+- [perf](https://blog.gmem.cc/perf)
+- [perf example](http://www.brendangregg.com/perf.html)
+
+# install
+sudo apt install linux-tools-$(uname -r) linux-tools-generic
+
 # 火焰图
 http://www.brendangregg.com/FlameGraphs/cpuflamegraphs.html#perf
 perf record -p `pgrep wrk` -a -g
 perf script > perf.stack
 
-# Perf example
-http://www.brendangregg.com/perf.html
-
+# system level
 perf top
-perf stat
-perf record -g
-perf report -g "graph,0.5,caller"
 
-# View kernel drop net package
+# system level specify function
 perf record -g -a -e skb:kfree_skb
 perf script
+
+# process level
+perf stat
+sudo perf stat -B -e cache-references,cache-misses,cycles,instructions,branches,faults,migrations sleep 5
+
+# function level
+perf report -g "graph,0.5,caller" -F 99 -p `pidof perf` -- sleep 20
+
+# dynamic probes
+$ sudo perf probe -x /bin/bash --funcs
+$ sudo perf probe -x /bin/bash -V readline
+$ sudo perf probe -x /bin/bash 'readline%return +0($retval):string’
+$ sudo perf record -e probe_bash:readline__return -aR sleep 5
+$ sudo perf script
+$ sudo perf probe --del probe_bash:readline__return
+
+# list tracepoints
+sudo perf list 'net:*'
+
+# cache_missing
+sudo perf stat -e L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores ./cache_missing
+
+sudo perf trace --no-syscalls --event 'net:*' ping 10.0.80.254 -c1
+
+sudo perf stat -e L1-dcache-prefetch-misses,L1-dcache-load-misses,L1-dcache-store-misses,dTLB-load-misses,dTLB-loads ./cache_missing
+sudo perf stat -e dTLB-loads,dTLB-load-misses,iTLB-loads,iTLB-load-misses -p $PID
+
+# [cing the CPU scheduler](https://www.scylladb.com/2016/06/10/read-latency-and-scylla-jmx-process/)
+sudo perf sched record -a sleep 6
+sudo perf sched latency -s max
+
+
+perf probe -x /usr/local/nginx/sbin/nginx --add 'ngx_http_lua_ffi_set_resp_status URI=r->uri.data:string STATUS=status PEER=r->upstream->peer.name->data:string'
+perf trace --no-sys --ev probe_nginx:*
+0.000 probe_nginx:ngx_http_lua_ffi_set_resp_status:(5652af759860) URI="/test1" STATUS=520 PEER="unix:/socks/nginx2.sock")

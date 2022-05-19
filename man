@@ -49,3 +49,9 @@ man 5 sysfs
 
 man iptables-extensions
 man xtables-addons
+
+# View core
+man 5 core
+
+# description of the filesystem hierarchy
+man 7 hier

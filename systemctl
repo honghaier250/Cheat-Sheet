@@ -40,3 +40,9 @@ systemctl set-default multi-user.target
 
 # runlevel 5
 systemctl set-default graphical.target
+
+# list service config
+systemctl show --property=FragmentPath docker
+
+# check whether start on boot
+systemctl is-enabled docker

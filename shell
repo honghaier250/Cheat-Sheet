@@ -3,6 +3,7 @@
 http://www.softpanorama.org/Scripting/Shellorama/String_operations/index.shtml
 
 for i in $(seq 1 30);do kssl s_client -connect 192.168.192.7:443 &;done
+while true; do curl http://localhost; done
 
 # TCP
 1.首先重定向，建立连接：
@@ -14,3 +15,34 @@ exec 6>&-
 echo -e "$data" >&6
 在关闭之前，你可以使用下面的命令来读取该连接返回的数据：
 cat <&6
+
+# short key
+mv /path/to/rightfile !$
+!:0 !:1 !:3 !:2
+egrep !:1-$
+mv /path/to/rightfile !-2:$
+cd !$:h
+cp /path/to/some/file !#:1.bak
+!!:gs/does/did/
+
+# ip_to_hex and hex_to_ip
+#!/usr/bin/env bash
+
+case $1 in
+
+  encode)
+    IP=$(printf '%02x' ${2//[.:]/ } | sed 's/../0x& /g')
+    echo "$2 <=> $IP"
+    ;;
+
+  decode)
+    IP=$(printf '%d.%d.%d.%d:%d\n' $(printf '0x%s ' $(echo "${2}" | sed 's/ //5')))
+    echo "$2 <=> $IP"
+    ;;
+  *)
+    echo "$0 encode/decode param"
+    ;;
+esac
+
+# web server
+https://funprojects.blog/2021/04/11/a-web-server-in-1-line-of-bash/

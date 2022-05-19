@@ -1,0 +1,1 @@
+nsenter -m -u -i -n -p -t $(docker inspect --format {{.State.Pid}} nginx)

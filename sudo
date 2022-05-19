@@ -1,0 +1,6 @@
+# Tell sudo to preserve environment
+sudo -E ls
+
+# Passing only the variables you need
+sudo --preserve-env=HOME /usr/bin/env
+sudo ZEBRA=true /usr/bin/env

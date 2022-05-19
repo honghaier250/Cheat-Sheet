@@ -1,6 +1,7 @@
 # https://github.com/trimstray/iptables-essentials
 # [iptables-tutorial](http://www.cs.unibo.it/~ghini/didattica/sistemimobili/25021-Iptables_Tutorial_1.2.pdf)
 # [/proc/sys/net/netfilter/nf_conntrack_](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt)
+# [netfilter](http://inai.de/images/nf-packet-flow.png)
 # Show hit for rules with auto refresh
 watch --interval 0 'iptables -nvL | grep -v "0     0"'
 
@@ -68,6 +69,17 @@ iptables -A INPUT -i eth1 -s 10.0.0.0/8 -j LOG --log-prefix "IP_SPOOF A: "
 
 # trace
 sudo iptables -t raw -A OUTPUT -p icmp -j TRACE
+sudo iptables -t raw -A PREROUTING -p icmp -j TRACE
+
+iptables -t filter -A INPUT -d $loglan -j LOG --log-prefix "IPTABLES_filter_INPUT-d:" --log-level 4
+iptables -t filter -A INPUT -s $loglan -j LOG --log-prefix "IPTABLES_filter_INPUT-s:" --log-level 4
+iptables -t filter -A OUTPUT -d $loglan -j LOG --log-prefix "IPTABLES_filter_OUTPUT-d:" --log-level 4
+iptables -t filter -A OUTPUT -s $loglan -j LOG --log-prefix "IPTABLES_filter_OUTPUT-s:" --log-level 4
+iptables -t filter -A FORWARD -j LOG --log-prefix "IPTABLES_filter_FORWARD:" --log-level 4
+
+iptables -t nat -A PREROUTING -j LOG --log-prefix "IPTABLES_nat_PREROUTING:" --log-level 4
+iptables -t nat -A POSTROUTING -j LOG --log-prefix "IPTABLES_nat_POSTROUTING:" --log-level 4
+iptables -t nat -A OUTPUT -j LOG --log-prefix "IPTABLES_nat_OUTPUT:" --log-level 4
 
 # port mirroring
 sudo iptables -t mangle -A PREROUTING -j TEE --gateway 10.0.80.199
@@ -79,3 +91,28 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j NETMAP --to 192.168.1.20
 
 # load balancing
 https://scalingo.com/articles/2018/04/20/iptables.html
+
+ip rule add fwmark 0x123 table 123
+ip route add 10.0.80.201/32 via 192.168.190.7 table 123
+ebtables -t broute -A BROUTING -s 08:00:27:76:85:01 -j mark --mark-set 0x123
+iptables -t mangle -A PREROUTING -m mark --mark 0x123 -j CONNMARK --save-mark --nfmask 0xffffffff --ctmask 0xffffffff
+iptables -t mangle -A PREROUTING -m mark ! --mark 0x0 -j ACCEPT
+iptables -t mangle -A PREROUTING -j CONNMARK --restore-mark --nfmask 0xffffffff --ctmask 0xffffffff
+
+# limit
+sudo iptables -I OUTPUT -p tcp --syn --dport 8888 -j DROP
+sudo iptables -I OUTPUT -p tcp --syn --dport 8888 -m limit --limit 1/m --limit-burst 1 -j ACCEPT
+sudo iptables -D OUTPUT -p tcp --syn -m hashlimit --hashlimit 1/min --hashlimit-burst 1 --hashlimit-name ratelimithash --hashlimit-htable-expire 5000 --hashlimit-htable-gcinterval 3000 -j ACCEPT
+
+sudo iptables -I OUTPUT -p tcp --dport 8888 -m connlimit --connlimit-above 3 -j DROP
+
+# random load balance
+iptables -A PREROUTING -t nat -p tcp -d 192.168.1.1 --dport 27017 \
+         -m statistic --mode random --probability 0.33            \
+         -j DNAT --to-destination 10.0.0.2:1234
+
+iptables -A PREROUTING -t nat -p tcp -d 192.168.1.1 --dport 27017 \
+         -m statistic --mode random --probability 0.5             \
+         -j DNAT --to-destination 10.0.0.3:1234
+
+[SNAT/DNAT](https://blog.csdn.net/weixin_45551608/article/details/117249462)

@@ -73,3 +73,12 @@ nmap -p 3018 10.0.90.0/24 | grep -B 4 -i "open"
 
 # multiport scan
 nmap 59.110.157.13 -p443,10443,9443,10009,60080
+
+# find http proxy
+nmap --script +http-open-proxy.nse --script-args proxy-url=https://www.google.com.hk 10.0.90.1-254
+
+# find sock5 proxy
+nmap --script +socks-open-proxy.nse --script-args proxy-url=https://www.google.com.hk 10.0.90.0/24 10.0.80.0/24
+
+# find ssh service
+nmap --script +ssh-auth-methods 10.0.80.195

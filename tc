@@ -1,3 +1,4 @@
+# [Linux网络堆栈中的排队](https://www.notlogy.com/113285.html)
 # [Linux 的网络资源隔离](https://toutiao.io/posts/lpkg13/preview)
 # [流量控制工具TC详细说明](http://www.ituring.com.cn/article/274014)
 # [简单使用](http://www.ituring.com.cn/article/274015)
@@ -54,3 +55,8 @@ tc filter add dev eth2 parent ffff: protocol ip prio 10 u32 match ip dst 192.168
 
 tc qdisc add dev eth0 root handle 10: htb
 tc filter add dev eth0 parent 10: protocol ip prio 10 u32 match ip src 172.16.0.11 match ip sport 53 action nat egress 172.16.0.11 192.168.99.10
+
+- [tcset](https://tcconfig.readthedocs.io/en/latest/pages/usage/tcset/index.html#advanced-usage)
+sudo tcset enp1s0 --direction incoming --delay 100ms --network 192.168.0.0/24 --port 80
+sudo tcshow enp1s0
+sudo tcdel enp1s0 --all

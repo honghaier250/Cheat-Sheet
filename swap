@@ -1,0 +1,5 @@
+# 查看swap
+swapon -v
+
+# 关闭swap
+swapoff -a

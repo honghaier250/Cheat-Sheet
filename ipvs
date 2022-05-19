@@ -1,0 +1,8 @@
+# nat mode
+sudo ipvsadm -A -t 10.0.109.208 -s wrr
+sudo ipvsadm -a -t 10.0.109.208:8080 -r 10.0.80.195 -m -w 1
+
+# dr mode
+
+
+# tun mode

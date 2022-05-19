@@ -1,0 +1,19 @@
+# [K3s](https://docs.rancher.cn/docs/k3s/installation/install-options/_index)
+# https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands
+
+kubectl describe pods coredns-d798c9dd-mpbpc -n kube-system
+
+kubectl logs -f cilium-29lvx -n kube-system
+
+kubectl exec cilium-phb2t -n kube-system -i -t -- bash
+
+kubectl cp develop.yaml cilium-md8sj:/ -n kube-system
+
+kubectl port-forward deployment/nginx :80
+
+kubectl run -it --image busybox test-hpa --restart=Never --rm /bin/sh
+
+kubectl debug node/mynode -it --image=ubuntu
+
+# debug
+https://kubernetes.io/docs/tasks/debug-application-cluster/debug-running-pod/

@@ -1,0 +1,3 @@
+# [packetdrill 教程](https://segmentfault.com/a/1190000019193928)
+# [](http://beta.computer-networking.info/syllabus/default/exercises/tcp-2.html)
+sudo packetdrill --local_ip=192.168.2.1 --bind_port=8888 mss-getsockopt-tcp_maxseg-client.pkt

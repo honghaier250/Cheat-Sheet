@@ -30,3 +30,6 @@ objdump -D -b binary -m i386 a.bin
 
 # 查看段内容
 objdump -s -j SectionName string.o
+
+# 
+objdump -Sdl /usr/local/ssl/lib/libcrypto.so.1.0.0 | grep -B 100 -i "6ce18"

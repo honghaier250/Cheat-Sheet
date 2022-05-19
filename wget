@@ -37,3 +37,6 @@ wget -U 'toto' http://google.com
 
 # Download entire websites
 wget --mirror --recursive --no-clobber --page-requisites --adjust-extension --convert-links --restrict-file-names=unix --user-agent=Mozilla --domains website.org --no-parent www.website.org/
+
+# benchmark
+while true; do wget -q -O- http://10.244.3.5; done

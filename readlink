@@ -1,0 +1,2 @@
+# get file name from fd
+readlink /proc/36509/fd/7

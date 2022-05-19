@@ -88,3 +88,27 @@ curl -vkl http://apis.juhe.cn/idcard/index\?key\=2df771f834019c6d0d34520b0415906
 
 # PhotoNo
 curl -vkl http://apis.juhe.cn/mobile/get\?key\=686418010e4c0a2e1c823e210016283c\&phone\=
+
+# POST with a data file
+curl -d "@data.json" -X POST http://localhost:3000/data
+
+# SpeedTest
+curl -w "@curl-format.txt" -o /dev/null -s "http://39.106.23.16:8082/100k"
+
+
+```curl-format.txt
+    time_namelookup:  %{time_namelookup}\n
+       time_connect:  %{time_connect}\n
+    time_appconnect:  %{time_appconnect}\n
+   time_pretransfer:  %{time_pretransfer}\n
+      time_redirect:  %{time_redirect}\n
+ time_starttransfer:  %{time_starttransfer}\n
+                    ----------\n
+         time_total:  %{time_total}\n
+```
+
+# Unix Domain Socket
+curl -vkl --unix-socket /var/run/http.sock https://localhost/
+
+# specify ssl protocol and cipher
+curl -kvl --tlsv1.2 --ciphers AES128-SHA256 https://kb.fortinet.com

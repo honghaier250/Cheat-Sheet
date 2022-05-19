@@ -1,3 +1,6 @@
+# [Networking Modes](https://www.cnblogs.com/bakari/p/10592421.html)
+# [Virtual Networking](https://www.virtualbox.org/manual/ch06.html)
+# [resize-disk](https://technology.amis.nl/2017/01/30/ubuntu-vm-virtualbox-increase-size-disk-make-smaller-exports-distribution/)
 # List VM
 VBoxManage list runningvms
 VBoxManage list vms -l | grep "Name:  "

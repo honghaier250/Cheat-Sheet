@@ -10,3 +10,9 @@ sudo hdparm -T /dev/sdb
 
 # disk readonly
 sudo hdparm -r 1 /dev/sdb
+
+# check read bad sector
+hdparm --read-sector 452485959 /dev/sda | grep read
+
+# check write bad sector
+hdparm --write-sector 833192656 /dev/sda | grep read

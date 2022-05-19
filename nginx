@@ -1,3 +1,4 @@
+# [tengine](https://tengine.taobao.org/documentation_cn.html)
 # Download
 https://nginx.org/packages/
 http://nginx.org/download/
@@ -20,6 +21,7 @@ http://melwin-jose.blogspot.com/2015/09/unit-testing-nginx-module.html
 
 # Nginx modules guide
 http://www.evanmiller.org/nginx-modules-guide.html
+https://www.nginx.com/resources/wiki/extending/api/
 
 # NginxCodeReview
 https://code.google.com/archive/p/nginxsrp/wikis/NginxCodeReview.wiki#ngx_hash
@@ -29,3 +31,12 @@ http://yikun.github.io/2014/03/13/nginxstart/
 
 # api
 https://www.nginx.com/resources/wiki/extending/api
+
+# Performance Test
+https://www.nginx.com/blog/testing-performance-nginx-ingress-controller-kubernetes/
+
+https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency
+
+https://www.nginx.com/blog/optimizing-web-servers-for-high-throughput-and-low-latency/
+
+[New Config Shell File](https://www.nginx.com/resources/wiki/extending/new_config/)

@@ -58,3 +58,11 @@ set pagination off
 set non-stop on
 
 p /u *(char *)(&ip->ip_src.s_addr)@4
+
+break 439 if $_memeq(cmd->name->data,"ssl_verify_client",17)
+
+# dump memory
+dump memory /root/output 0x00621000 0x00622000
+
+# print ip
+x/4ub ip

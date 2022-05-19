@@ -51,6 +51,12 @@ ip link set dev eth1 arp off && ip link set dev eth1 arp on
 ip tuntap add mode tun tun0
 ip link set dev tun0 up
 
+# Enable tun interface
+ip tuntap add name tun0 mode tun
+ip link set tun0 up
+ip addr add 192.0.2.1 peer 192.0.2.2 dev tun0
+ip route add 0.0.0.0/0 via 192.0.2.2 dev tun0
+
 # tcp_metrics
 ip tcp_metrics show
 
@@ -93,3 +99,21 @@ sudo ip addr add 192.168.2.3 peer 192.168.2.2 dev tun0
 sudo ip link set tun0 up
 
 # [vrf-tutorial](https://static.sched.com/hosted_files/ossna2017/fe/vrf-tutorial-oss.pdf)
+# [why vrf](https://cumulusnetworks.com/blog/vrf-for-linux/)
+#
+# namespace
+NSNAME=namespace1
+IFNAME
+ip netns add $NSNAME
+ip link add $IFNAME1 type veth peer name $IFNAME2
+ip link set $IFNAME1 netns $NSNAME
+
+# bonding
+ip link add bond0 type bond
+ip link set bond0 type bond miimon 100 mode active-backup fail_over_mac active
+ip link set em1 down
+ip link set em1 master bond0
+ip link set em2 down
+ip link set em2 master bond0
+ip link set bond0 up
+

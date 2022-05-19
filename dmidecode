@@ -12,3 +12,9 @@ sudo dmidecode -s processor-manufacturer
 
 # memory
 dmidecode --type 17
+
+# Check If A Linux System Is Physical Or Virtual Machine
+dmidecode | egrep -i 'manufacturer|product'
+
+# cache
+sudo dmidecode -t cache

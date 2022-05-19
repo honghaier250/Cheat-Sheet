@@ -1,0 +1,10 @@
+sudo uptime
+sudo dmesg | tail
+sudo mpstat -P ALL 1
+sudo vmstat 1
+sudo iostat -xz 1
+sudo pidstat 1
+sudo free -m
+sudo sar -n DEV 1
+sudo sar -n TCP,ETCP 1
+sudo top

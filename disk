@@ -1,0 +1,4 @@
+dblocks -s -v -o /root/bb.log /dev/sda
+smartctl -a   /dev/sda3
+
+[format-usb](https://computingforgeeks.com/format-sdcard-usb-flash-drive-on-linux-terminal/)

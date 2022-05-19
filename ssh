@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 # [Proxytunnel](https://blog.cppse.nl/apache-proxytunnel-ssh-tunnel)
+# -[玩转SSH端口转发](https://blog.fundebug.com/2017/04/24/ssh-port-forwarding/)
 # To ssh via pem file (which normally needs 0600 permissions):
 ssh -i /path/to/file.pem user@example.com
 
@@ -10,6 +12,8 @@ ssh -A user@example.com
 
 # To execute a command on a remote server:
 ssh -t user@example.com 'the-remote-command'
+ssh -p 60022 ssl@10.0.109.123 tail -100f /var/log/NRP/1/access.log
+ssh honghaier@10.0.80.195 "sudo -S /usr/sbin/tcpdump -i any -s0 -w - 'port 8080'" | wireshark -k -i -
 
 # To tunnel an x session over SSH:
 ssh -X user@example.com
@@ -46,7 +50,8 @@ emacs /ssh:name@server:/path/to/file
 # Start for SSL6
 sudo start-stop-daemon --start --quiet --oknodo --pidfile /tmp/sshd-remote.pid --exec /usr/sbin/sshd -- -f /cfg/GAD/core/sshd.conf
 
-# SSH Tunnel
+# Local Port Forwarding
+# [](https://serveo.net/)
 ssh -f -N -L :8080:192.168.190.7:80 -p 60022 ssl@10.0.109.120
 ssh -f -N -L :60022:192.168.80.197:22 root@192.168.80.197
 scp -P 60022 NRPHelper.php root@192.168.192.1:~/
@@ -59,19 +64,53 @@ ssh -f -N -L :30001:127.0.0.1:22 admin@127.0.0.1
 # GatewayPorts yes
 ssh -o GatewayPorts=true -f -N -R :2222:10.20.1.7:22 honghaier@10.0.80.195
 ssh -p 2222 root@10.0.80.195
+# Remote Port Forwarding
+ssh -R local:2000:remote:3000 root@103.59.22.17
+
+# Dynamic Port Forwarding
+ssh -D local:2000 root@103.59.22.17
 
 # Tun Tunnel
 sudo sshd -f /etc/ssh/sshd_config -o "PermitRootLogin=yes" -o "PermitTunnel=yes" -o "ServerAliveInterval=30"
 sudo ssh -f -w 0:0 root@10.0.80.198 true
 
-# Tail remote log
-ssh -p 60022 ssl@10.0.109.123 tail -100f /var/log/NRP/1/access.log
-
-# router
+# Login router
 ssh root@192.168.1.1
 
-# copy file to remote
+# Copy file to remote
 ssh -p12522 admin@10.0.90.120 "cat > file" < file
 
-# receive file from remote
+# Receive file from remote
 ssh -p12522 admin@10.0.90.120 "cat file" > file
+
+# 将你的麦克风输出到远程计算机的扬声器
+dd if=/dev/dsp | ssh -c arcfour -C username@host dd of=/dev/dsp
+
+# 比较远程和本地文件
+ssh user@host cat /path/to/remotefile | diff /path/to/localfile –
+
+# 通过中间主机建立SSH连接
+ssh -t reachable_host ssh unreachable_host
+
+# 通过SSH运行复杂的远程shell命令
+ssh host -l user “`cat cmd.txt`”
+
+# chain port forward: client2 ssh login in client1
+ssh -p 22222 client1
+
+- internet[10.0.80.195]
+
+- client2
+ssh -f -N -L localhost:22222:localhost:2000 -p 22 honghaier@10.0.80.195
+#ssh -f -N -R localhost:2001:localhost:22 honghaier@10.0.80.195
+
+- client1
+ssh -f -N -R localhost:2000:localhost:22 -p 22 honghaier@10.0.80.195
+#ssh -f -N -L localhost:22222:localhost:2001 honghaier@10.0.80.195
+#
+
+# K0a120190701
+ssl ssl2@10.0.1.81
+
+# speed test
+ssh -2 -c aes128-cbc root@<router> time dd if=/dev/zero bs=500000 count=200 > /dev/null

@@ -1,0 +1,14 @@
+# 生成证书
+sudo /usr/local/strongswan/sbin/ipsec pki --gen --type rsa --size 4096 --outform pem > strongswanCaKey.pem
+sudo /usr/local/strongswan/sbin/ipsec pki --self --ca --lifetime 3650 --in strongswanCaKey.pem --type rsa --dn "C=CH, O=strongSwan, CN=strongSwan Root CA" \\n\t   --outform pem > strongswanCaCert.pem
+
+sudo /usr/local/strongswan/sbin/ipsec pki --gen --type rsa --size 2048 --outform pem > strongswanServerKey.pem
+sudo /usr/local/strongswan/sbin/ipsec pki --pub --in strongswanServerKey.pem --type rsa | \\n\t sudo /usr/local/strongswan/sbin/ipsec pki --issue --lifetime 730 \\n\t  --cacert strongswanCaCert.pem \\n\t  --cakey strongswanCaKey.pem \\n\t  --dn "C=CH, O=strongSwan, CN=strongswan.server.example.com" \\n\t  --san strongswan.server.example.com \\n\t  --flag serverAuth --flag ikeIntermediate \\n\t  --outform pem > strongswanServerCert.pem
+
+sudo /usr/local/strongswan/sbin/ipsec pki --gen --type rsa --size 2048 --outform pem > strongswanClientKey.pem
+sudo /usr/local/strongswan/sbin/ipsec pki --pub --in strongswanClientKey.pem --type rsa | \\n\t sudo /usr/local/strongswan/sbin/ipsec pki --issue --lifetime 730 \\n\t  --cacert strongswanCaCert.pem \\n\t  --cakey strongswanCaKey.pem \\n\t  --dn "C=CH, O=strongSwan, CN=strongswan.client.example.com" \\n\t  --san strongswan.client.example.com \\n\t  --flag serverAuth --flag ikeIntermediate \\n\t  --outform pem > strongswanClientCert.pem
+
+# IPSec手动创建隧道
+https://redwingz.blog.csdn.net/article/details/90415139
+
+

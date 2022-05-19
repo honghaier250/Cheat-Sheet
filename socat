@@ -18,3 +18,23 @@ socat tcp4-listen:9000,reuseaddr,fork exec:'openssl s_client -connect sso.avic.c
 
 ~/Downloads/socat tcp4-listen:9000,reuseaddr,fork ssl:36.112.111.69:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.128.0.54:60443"
 ~/Downloads/socat tcp4-listen:9000,reuseaddr,fork ssl:36.112.111.38:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.129.81.182:60443"
+
+socat -v tcp4-listen:9000,reuseaddr,fork ssl:39.107.109.176:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.88.170.160:22"
+
+socat -v tcp4-listen:9000,reuseaddr,fork exec:'/usr/local/ssl/bin/openssl s_client -connect 10.0.80.195\:50443'
+socat -v tcp4-listen:9000,reuseaddr,fork exec:'/usr/local/ssl/bin/openssl s_client -connect 39.107.109.176\:34402 -cert client.pem -key client.key -servername "tcp://127.0.0.1:22"'
+socat tcp4-listen:9000,reuseaddr,fork exec:'openssl s_client -connect sso.avic.com\:34402 -cert client.pem -key client.key -servername "tcp://10.129.81.247:22"'
+
+# connect proxy two inbound tcp connections
+
+- server[10.0.80.195]
+socat tcp-listen:62222,reuseaddr,fork tcp-listen:62222
+
+- client1
+socat - tcp4:10.0.80.195:62222
+
+- client2
+socat tcp:10.0.80.195:62222 exec:bash,pty,stderr
+
+# simplevpn
+http://devdoc.net/linux/socat-1.7.3_index/socat-tun.html

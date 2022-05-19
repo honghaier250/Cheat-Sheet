@@ -13,5 +13,8 @@ dpkg -s test.deb
 # Find out cp belong to which package
 dpkg -S `which cp`
 
-# extra content
+# Extra content
 dpkg -x test.deb /tmp/directory
+
+# List Installed Packages with dpkg-query
+sudo dpkg-query -l | less

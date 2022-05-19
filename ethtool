@@ -1,3 +1,4 @@
+# [](https://blog.packagecloud.io/eng/2016/06/22/monitoring-tuning-linux-networking-stack-receiving-data/)
 # change the speed and duplex settings
 ethtool -s eth0 speed 100 duplex full
 
@@ -13,6 +14,7 @@ sudo ethtool -S eth0
 
 # rx/tx queue
 sudo ethtool -l eth0
+ethtool -L eth0 combined 2
 
 # rx/tx queue size
 sudo ethtool -g eth0
@@ -22,3 +24,10 @@ sudo ethtool -k eth0
 
 # timestamp modes
 sudo ethtool -T enp1s0
+
+# flow steering
+ethtool -N ext0 flow-type udp4 dst-ip 198.18.0.12 dst-port 1234 action 2
+
+ethtool -s eth1 speed 100 duplex full autoneg off
+
+ethtool -S ens1f0 | grep 'rx_queue_.*_packets'

@@ -1,0 +1,2 @@
+# count process open file
+lsof -n|awk '{print $2}'| sort | uniq -c | sort -nr | head

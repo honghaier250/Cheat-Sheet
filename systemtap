@@ -1,0 +1,10 @@
+- [SystemTap Language Reference](https://sourceware.org/systemtap/langref/)
+- [Systemtap Installation](https://wiki.ubuntu.com/Kernel/Systemtap)
+
+- [nginx](https://segmentfault.com/a/1190000010774974)
+ - [](https://www.v2ex.com/t/387987#reply0)
+
+user_string()
+print_ubacktrace()
+
+stap malloc.stp -c "env 'LD_LIBRARY_PATH=.../glibc-build:.../glibc-build/nptl' /usr/bin/ls"

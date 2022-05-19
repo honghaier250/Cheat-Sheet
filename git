@@ -1,11 +1,14 @@
 # [Learn Git Branching](https://learngitbranching.js.org/)
+# [git-flight-rules](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md)
 # To set your identity:
 git config --global user.name "hehongjie"
 git config --global user.email hehj@koal.com
-git config --global credential.helper store
+#git config --global credential.helper store
+git config --global credential.helper cache
 git config --global http.sslVerify false
 git config --global https.proxy http://127.0.0.1:1080
 git config --global --unset https.proxy
+git config --global help.autocorrect 1
 
 # To set your editor:
 git config --global core.editor vim
@@ -158,9 +161,24 @@ git push origin v0.0.0.1
 
 gst | grep -i "类型变更" | awk  '{print $2}' | xargs git checkout  --
 gst | grep -i "删除" | awk  '{print $2}' | xargs git rm
+gst | grep -i "删除" | awk  '{print $2}' | xargs git restore
 gst | grep -i "修改" | awk  '{print $2}' | xargs git checkout  --
 
 gst | grep -i "modified" | awk  '{print $3}' | xargs git checkout  --
 gst | grep -i "deleted" | awk  '{print $3}' | xargs git checkout  --
 gst | grep -i "typechange" | awk  '{print $3}' | xargs git checkout  --
 gst | awk  '{print $2}' | xargs /bin/rm -rf
+
+# branch alias
+git symbolic-ref refs/heads/test refs/heads/47-支持在lua中保存connection上下文信息
+
+# search
+git rev-list --all | xargs git grep -F 'ls'
+
+# proxy
+git config --global http.proxy 'socks5://127.0.0.1:1080'
+git config --global https.proxy 'socks5://127.0.0.1:1080'
+git config --global http.proxy http://127.0.0.1:1080
+git config --global https.proxy https://127.0.0.1:1080
+git config --global --unset http.proxy
+git config --global --unset https.proxy

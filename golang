@@ -1,0 +1,8 @@
+[项目的目录结构](https://makeoptim.com/golang/standards/project-layout)
+
+# build for debug
+go build -gcflags "-N -l" spilt.go
+
+# proxy https://goproxy.io/zh/
+$ go env -w GO111MODULE=on
+$ go env -w GOPROXY=https://goproxy.cn,direct

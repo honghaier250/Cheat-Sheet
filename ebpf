@@ -1,0 +1,49 @@
+- [reference_guide](https://github.com/iovisor/bpftrace/blob/master/docs/reference_guide.md)
+
+- [bpftrace Cheat Sheet](http://www.brendangregg.com/BPF/bpftrace-cheat-sheet.html)
+
+- [BCC](https://linoxide.com/linux-how-to/bcc-kernel-tracing-tools-linux-performance/)
+
+- [Debug BPF Programs](https://qmo.fr/docs/talk_20200202_debugging_ebpf.pdf)
+
+- [bpftool-map](https://www.mankier.com/8/bpftool-map)
+
+# install
+sudo docker run -v $(pwd):/output quay.io/iovisor/bpftrace:master-vanilla_llvm_clang_glibc2.23 /bin/bash -c "cp /usr/bin/bpftrace /output"
+
+# cache missing
+sudo bpftrace -e 'hardware:cache-misses:1000 /comm == "cache_missing"/ { @[comm, pid] = count(); }'
+
+sudo bpftrace -e 'kretprobe:tcp_current_mss /comm == "packetdrill"/ { printf("%d!\n", retval); }'
+
+# slow down process
+sudo bpftrace --unsafe -e 'k:vfs_read /pid == cpid/ { printf("%s == ls\n", comm); system("sleep %d\n", 10); }' -c /bin/ls
+
+# dump ebpf
+bpftool prog dump xlated id 10496
+llvm-objdump-9 -S -no-show-raw-insn bpf_xdp.o
+
+# dump map
+bpftool prog
+bpftool map dump id 3360
+bpftool map delete id 3353 key 0x0a 0x00 0x50 0xc3
+
+# log
+cat /sys/kernel/debug/tracing/trace_pipe
+bpftool prog tracelog
+
+# feature
+bpftool feature probe
+
+# bcc
+sudo docker run -it --rm \
+  --privileged \
+  -v /lib/modules:/lib/modules:ro \
+  -v /usr/src:/usr/src:ro \
+  -v /etc/localtime:/etc/localtime:ro \
+  --workdir /usr/share/bcc/tools \
+  jess/bcc-tools cachetop
+
+sudo docker run -ti -v /usr/src:/usr/src:ro -v /lib/modules/:/lib/modules:ro -v /sys/kernel/debug/:/sys/kernel/debug:rw --net=host --pid=host --privileged quay.io/iovisor/bpftrace:latest
+
+# [bcc bug](https://gitlab.com/gitlab-com/gl-infra/infrastructure/-/issues/12052)

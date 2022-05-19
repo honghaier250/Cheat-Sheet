@@ -1,0 +1,3 @@
+renice 20 -p `pidof java`
+
+renice -20 -p `pidof java`

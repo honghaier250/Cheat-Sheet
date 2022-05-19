@@ -126,3 +126,6 @@ tcp and frame contains 15:01:01:00:02:02
 sudo tcpdump -i any -A -n -e -s0 '(tcp[(tcp[12]>>2):4] = 0x48545450) and (tcp[((tcp[12]>>2)+8):4] = 0x20353032)'
 
 sudo tcpdump -i any -A -n -s0 'host 10.0.1.60 and port 80 and (tcp[(tcp[12]>>2):4] = 0x47455420) and (tcp[((tcp[12]>>2)+8):4] = 0x7257656c)'
+
+# displaying HTTP request and response headers
+sudo stdbuf -oL -eL /usr/sbin/tcpdump -A -s 10240 "tcp port 4080 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)" | egrep -a --line-buffered ".+(GET |HTTP\/|POST )|^[A-Za-z0-9-]+: " | perl -nle 'BEGIN{$|=1} { s/.*?(GET |HTTP\/[0-9.]* |POST )/\n$1/g; print }'

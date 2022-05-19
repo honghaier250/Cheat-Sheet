@@ -1,0 +1,10 @@
+- [stress-ng](https://www.cyberciti.biz/faq/stress-test-linux-unix-server-with-stress-ng/)
+
+# memory stress test
+sudo stress-ng --vm 2 --vm-bytes 12G --timeout 60s --metrics-brief
+
+# cpu stress test
+sudo stress-ng --cpu 4 --timeout 60s --metrics-brief
+
+# disk stress test
+sudo stress-ng --disk 2 --io 2 --timeout 60s --metrics-brief

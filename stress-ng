@@ -1,0 +1,11 @@
+# [stress-ng](https://elinux.org/images/5/5c/Lyon-stress-ng-presentation-oct-2019.pdf)
+# [a simple example](https://wiki.ubuntu.com/Kernel/Reference/stress-ng)
+
+# CPU 密集型进程
+stress --cpu 1 --timeout 600
+
+# I/O 密集型进程
+stress-ng -i 1 --hdd 1 --timeout 600
+
+# 大量进程的场景
+stress-ng -c 8 --timeout 600

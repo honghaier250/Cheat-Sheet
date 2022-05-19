@@ -4,3 +4,6 @@ dig -x 8.8.8.8 +short
 # Query Specific Name Server
 dig @100.100.2.136 -x 47.93.196.49
 
+# short output
+dig networkworld.com +noall +answer
+dig +noall +answer -f domains

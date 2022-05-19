@@ -13,3 +13,5 @@ kill -SIGSTOP `pgrep crond`
 kill -SIGCONT `pgrep crond`
 
 kill `pidof mosh-server`
+
+exec killall -STOP -u user1

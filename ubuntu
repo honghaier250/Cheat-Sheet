@@ -15,7 +15,8 @@ sudo apt-get install -y cifs-utils
 sudo apt-get install -y deepin-screenshot
 sudo apt-get install -y p7zip-full
 sudo apt-get install -y pavucontrol
-sudo apt-get install -y fcitx-table-wbpy
+#sudo apt-get install -y fcitx-table-wbpy
+sudo apt-get install -y ibus-rime librime-data-wubi
 sudo apt-get install -y python-pip
 sudo apt-get install -y wireshark
 sudo apt-get install -y blogilo
@@ -29,8 +30,16 @@ sudo apt-get install -y gnome-sushi
 sudo apt-get install -y fd-find
 sudo apt-get install -y translate-shell
 sudo apt-get install -y privoxy
+sudo apt-get install -y errno
+sudo apt-get install -y asciinema
+sudo apt-get install -y ansible yamllint ansible-lint
+sudo apt-get install -y entr
+sudo apt-get install -y tldr
+sudo apt-get install -y exa
 sudo pip install cheat
 sudo pip install shadowsocks
+sudo pip install tcconfig
+sudo pip3 install thefuck
 sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 tsocks wget https://typora.io/linux/linux/typora_0.9.54_amd64.deb
 
@@ -38,3 +47,5 @@ sudo apt-get remove -y unity-webapps-common
 sudo apt-get autoremove -y
 
 http://meldmerge.org/
+[kgotobed](https://github.com/nikital/kgotobed.git)
+[gotty](https://github.com/yudai/gotty)

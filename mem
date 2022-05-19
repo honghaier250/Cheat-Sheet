@@ -1,3 +1,7 @@
+# 
+dmidecode -t memory | grep Locator
+dmidecode -t memory | grep Speed
+
 # System
 top
 
@@ -6,3 +10,7 @@ vmstat
 
 # Per Progress
 pmap
+
+sync; echo 1 > /proc/sys/vm/drop_caches
+sync; echo 2 > /proc/sys/vm/drop_caches
+sync; echo 3 > /proc/sys/vm/drop_caches
