@@ -1,0 +1,1 @@
+start-stop-daemon --start --quiet --background --exec nginx -- -p /etc/nginx -c conf/nginx.conf

@@ -1,2 +1,7 @@
+# https://blog.spoock.com/2019/10/08/proc/
 # Net
 /proc/net
+
+# [vm](https://lrita.github.io/2018/06/09/linux-kernel-sysctl-vm/)
+
+# [pid](https://www.linuxprobe.com/linux-proc-pid.html)

@@ -173,3 +173,23 @@ awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++}
 
 # use openssl s_server as a reverse proxy
 exec 3<> /dev/tcp/10.0.109.80/8080; /usr/local/ssl/bin/openssl s_server -accept 34402 -cert rsa_sig.pem -key rsa_sig.key -CApath ./ -quiet <&3 >&3
+
+# 在线签发站点证书
+https://www.ssleye.com/self_sign.html
+
+# speed test cpu/engine
+openssl speed -engine ./engine_sd.so -elapsed rand
+openssl speed -elapsed rand
+
+# ocsp
+openssl ocsp -validity_period 300 -CAfile ca.pem -issuer subca.pem -cert mysite.pem -url http://10.0.100.158:3019
+
+openssl asn1parse -inform DER -offset 768003 -in qr-code-final.png
+
+/usr/local/kssl/1.1/bin/openssl s_server -nocert -gmvpn -accept 9999 -xcert sm2.pem -xkey sm2.key -xcert sm2.pem -xkey sm2.key -xcert sm2_enc.pem -xkey sm2_enc.key -CAfile ca/sm2-ca.pem
+/usr/local/kssl/1.1/bin/openssl s_client -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-enc.pem -xkey sm2-user-enc.key -gmvpn --cipher ECC-SM4-SM3 -connect 10.0.80.195:9999
+
+openssl pkcs12 -export -inkey mysite.key -in mysite.pem -nodes -out mysite.p12  (输出不带口令的p12证书)
+或 openssl pkcs12 -export -inkey mysite.key -in mysite.pem -passout pass:123456 -out mysite.p12  (输出带口令的p12证书)
+或 openssl pkcs12 -export -inkey mysite.key -in mysite.pem -passin pass:123456 -passout pass:123456 -out mysite.p12  (私钥带密码的情况)
+

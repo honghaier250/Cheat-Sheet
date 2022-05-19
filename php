@@ -29,3 +29,6 @@ debug_zval_dump();
 # Debug Dom
 $dom->formatOutput = true;
 echo $dom->saveXML();
+
+# web service
+php -S 127.0.0.1:8080

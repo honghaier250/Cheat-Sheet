@@ -1,0 +1,7 @@
+# dpdk
+- [深入浅出DPDK](https://www.cxyzjd.com/article/Rong_Toa/109371992)
+
+
+# vpp
+make rebuild VPP_EXTRA_CMAKE_ARGS="-DCMAKE_C_FLAGS:STRING=' -g3 -O0 ' -DCMAKE_SHARED_LINKER_FLAGS:STRING=' -g3 -O0 ' -DCMAKE_CXX_FLAGS:STRING=' -g3 -O0 '"
+

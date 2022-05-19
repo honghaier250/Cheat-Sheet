@@ -1,0 +1,2 @@
+# redirect output to another tty
+exec 1>/dev/pts/1

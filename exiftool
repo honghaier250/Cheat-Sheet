@@ -1,0 +1,1 @@
+exiftool -a -G -s qr-code-final.png

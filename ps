@@ -8,7 +8,7 @@ ps axjf
 ps -aufoouser
 
 # To list every process with a user-defined format:
-ps -eo pid,user,command
+ps -eo pid,user,command,ps,wchan:25 -p 297701
 
 # Exclude grep from your grepped output of ps.
 # Add [] to the first letter. Ex: sshd -> [s]shd
@@ -26,3 +26,6 @@ LANG=C ps -e -o%mem,pid,tid,ppid,comm | grep -v MEM | sort -n -r | head -20
 
 # Zombie process
 ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}'
+
+
+ps -eo pid,user,wchan=WIDE-WCHAN-COLUMN -o s,cmd|awk ' $4 ~ /D/ {print $0}'

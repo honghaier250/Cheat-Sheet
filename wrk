@@ -1,5 +1,5 @@
-sudo ulimit -n 819200
-sudo ulimit -i 819200
+ulimit -n 819200
+ulimit -i 819200
 
 sudo sysctl -w net.core.somaxconn=65535
 sudo sysctl -w net.ipv4.ip_local_port_range="1025    65535"
@@ -11,3 +11,27 @@ sudo sysctl -w net.netfilter.nf_conntrack_max=2097152
 sudo sysctl -w fs.file-max=1622794
 
 wrk -t30 -c30 -d60s  --timeout 5s https://10.0.80.195/ --latency
+
+关闭nat
+# Nginx
+keepalive
+session reused
+proxy_cache
+ssl_engine
+tcp_nodelay on;
+
+listen backlog=65535 reuseport;
+worker_priority -20;
+worker_processes auto;
+worker_cpu_affinity auto;
+worker_rlimit_nofile 819200;
+pcre_jit on;
+events {
+     accept_mutex on;
+     accept_mutex_delay 1ms;
+     multi_accept on;
+}
+
+# https://bbs.huaweicloud.com/blogs/108630
+error_log /dev/null;
+access_log /dev/null;

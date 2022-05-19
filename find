@@ -64,3 +64,6 @@ find /basedir -type f -name '*.txt' -exec sh -c 'some code here' sh {} +
 find . ! -name file10.txt -delete
 
 find /kssl -user root
+
+# To find recently installed packages
+sudo find /usr/sbin -cmin -30

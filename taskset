@@ -1,1 +1,3 @@
 taskset -cp 1 pid
+
+taskset -c 0 sh -c 'while :; do :; done'

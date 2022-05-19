@@ -26,3 +26,19 @@ apt remove package(s)
 sudo apt list --installed
 
 sudo apt purge --autoremove "linux-*4.15.0-58*"
+
+# Print url
+sudo apt-get install --print-uris -y package-name
+
+# socks5 proxy
+ssh -D 1080 root@can_internet_host -p can_internet_host_port
+sudo apt -o Acquire::http::proxy="http://10.0.90.209:1123/" install nmap
+
+Acquire::http::Proxy "http://10.0.90.209:1123/";
+Acquire::https::Proxy "http://10.0.90.209:1123/";
+
+# lock kernel version
+https://linzhanyu.github.io/linux/2020/04/15/apt-mark.html
+
+# download package
+apt --download-only -o Dir::Cache="./" -o Dir::Cache::archives="./" install libgd-dev

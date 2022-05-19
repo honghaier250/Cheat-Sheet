@@ -1,1 +1,9 @@
-sudo dmesg -H -l debug
+[dmesg explained](https://tldp.org/LDP/LG/issue59/nazario.html)
+
+sudo dmesg -H -T
+
+dmesg --follow
+
+dmesg -f kern,daemon
+
+dmesg -l err,crit

@@ -1,0 +1,9 @@
+# http proxy
+http://10.0.90.219:1123
+http://10.0.90.100:1081
+http://10.0.90.45:8088
+
+# sock5 proxy
+10.0.80.215:1082
+
+curl -vkl http://demo.spiderpy.cn/get/

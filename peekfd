@@ -1,0 +1,1 @@
+tty=pts/2; sudo peekfd -8cnd $(ps -fat | grep "$tty *Ss" | awk '{print$1}') 0 1 2

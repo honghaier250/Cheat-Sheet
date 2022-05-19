@@ -1,0 +1,3 @@
+# source /usr/bin/tsocks on
+telnet www.foo.org
+# source /usr/bin/tsocks off

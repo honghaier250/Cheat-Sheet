@@ -1,0 +1,4 @@
+# Listing the Most Recently Installed Packages
+zgrep " install " /var/log/dpkg.log* | sort
+zcat -f /var/log/dpkg.log* | grep " install " | sort
+rpm -qa --last | head

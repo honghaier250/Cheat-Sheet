@@ -100,3 +100,5 @@ curl -w "@curl-format.txt" -o /dev/null -s "http://39.106.23.16:8082/100k"
 # Unix Domain Socket
 curl -vkl --unix-socket /var/run/http.sock https://localhost/
 
+# specify ssl protocol and cipher
+curl -kvl --tlsv1.2 --ciphers AES128-SHA256 https://kb.fortinet.com

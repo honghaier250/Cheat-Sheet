@@ -12,3 +12,6 @@ https://vincent.bernat.ch/en/blog/2014-tcp-time-wait-state-linux
 # tcp Window Scale
 http://www.linuxtcpipstack.com/455.html
 https://www.phpfans.net/ask/MTMxNDAwOQ.html
+
+# TCP_USER_TIMEOUT
+https://blog.cloudflare.com/when-tcp-sockets-refuse-to-die/

@@ -1,0 +1,5 @@
+# [galaxy](https://galaxy.ansible.com/search?deprecated=false&keywords=&order_by=-relevance)
+ansible-playbook --ask-become-pass /etc/ansible/playbook/nginx/nginx.yml
+
+#
+ansible-galaxy install gantsign.oh-my-zsh

@@ -1,0 +1,30 @@
+pki --gen --type rsa --size 2048 --outform pem > strongswanKey.pem
+pki --self --ca --lifetime 3652 --in strongswanKey.pem --dn "C=CH, O=strongSwan, CN=strongSwan Root CA" --outform pem > strongswanCert.pem
+
+pki --gen --type rsa --size 2048 --outform pem > moonKey.pem
+pki --req --type priv --in moonKey.pem --dn "C=CH, O=strongswan, CN=moon.strongswan.org" --san moon.strongswan.org --outform pem > moonReq.pem
+pki --issue --cacert strongswanCert.pem --cakey strongswanKey.pem --type pkcs10 --in moonReq.pem --lifetime 1826 --outform pem > moonCert.pem
+
+pki --gen --type rsa --size 2048 --outform pem > bobKey.pem
+pki --req --type priv --in bobKey.pem --dn "C=CH, O=strongswan, CN=bob.strongswan.org" --san bob.strongswan.org --outform pem > bobReq.pem
+pki --issue --cacert strongswanCert.pem --cakey strongswanKey.pem --type pkcs10 --in bobReq.pem --lifetime 1826 --outform pem > bobCert.pem
+
+./pki --gen --outform pem --type sm2 --size 256 > /tmp/caKey.pem
+./pki --self --ca --lifetime 3650 --outform pem --in /tmp/caKey.pem --dn "C=CH, O=strongSwan, CN=strongSwan SM2 Root CA" --type sm2 > /tmp/ca.pem
+
+./pki --gen --outform pem --type sm2 --size 256 > /tmp/aliceSigKey.pem
+./pki --req --outform pem --in /tmp/aliceSigKey.pem --dn "C=CH, O=strongswan, CN=alice.strongswan.org" --san alice.strongswan.org --type sm2 > /tmp/aliceSigReq.pem
+./pki --issue --outform pem  --lifetime 1460 --cacert /tmp/ca.pem --cakey /tmp/caKey.pem --type pkcs10 --in /tmp/aliceSigReq.pem --sign > /tmp/aliceSig.pem
+
+./pki --gen --outform pem --type sm2 --size 256 > /tmp/aliceEncKey.pem
+./pki --req --outform pem --in /tmp/aliceEncKey.pem --dn "C=CH, O=strongswan, CN=alice.strongswan.org" --san alice.strongswan.org --type sm2 > /tmp/aliceEncReq.pem
+./pki --issue --outform pem  --lifetime 1460 --cacert /tmp/ca.pem --cakey /tmp/caKey.pem --type pkcs10 --in /tmp/aliceEncReq.pem --encipher > /tmp/aliceEnc.pem
+
+
+./pki --gen --outform pem --type sm2 --size 256 > /tmp/carolSigKey.pem
+./pki --req --outform pem --in /tmp/carolSigKey.pem --dn "C=CH, O=strongswan, CN=carol.strongswan.org" --san carol.strongswan.org --type sm2 > /tmp/carolSigReq.pem
+./pki --issue --outform pem  --lifetime 1460 --cacert /tmp/ca.pem --cakey /tmp/caKey.pem --type pkcs10 --in /tmp/carolSigReq.pem --sign > /tmp/carolSig.pem
+
+./pki --gen --outform pem --type sm2 --size 256 > /tmp/carolEncKey.pem
+./pki --req --outform pem --in /tmp/carolEncKey.pem --dn "C=CH, O=strongswan, CN=carol.strongswan.org" --san carol.strongswan.org --type sm2 > /tmp/carolEncReq.pem
+./pki --issue --outform pem  --lifetime 1460 --cacert /tmp/ca.pem --cakey /tmp/caKey.pem --type pkcs10 --in /tmp/carolEncReq.pem --encipher > /tmp/carolEnc.pem

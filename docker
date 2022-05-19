@@ -60,3 +60,12 @@ sudo docker run --env HTTP_PROXY="https://10.0.80.195:8118" x11docker/deepin
 sudo docker run --restart=always
 
 docker images | awk '{print $3}' | xargs docker image rm
+
+# ubuntu instance
+sudo tsocks docker run -it --entrypoint "/bin/bash" ubuntu:20.04
+
+# namespace id
+docker inspect --format '{{ .State.Pid }}' container_pid
+
+# Building multi-arch Docker images 
+https://hungpham2511.github.io/2021/02/06/docker-arm-support-with-buildx-and-simulator.html

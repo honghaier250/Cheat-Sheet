@@ -24,3 +24,5 @@ sudo add-apt-repository "deb http://dl.google.com/linux/chrome/deb/ stable main"
 
 # tun2socks
 sudo add-apt-repository ppa:hda-me/badvpn-tun2socks
+
+sudo add-apt-repository ppa:longsleep/golang-backports

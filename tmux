@@ -84,3 +84,4 @@ tmux detach-client -t /dev/pts/X
 
 tmux list-client
 tmux detach-client -s ssl
+:resize-window -A

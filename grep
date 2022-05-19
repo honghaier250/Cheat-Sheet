@@ -45,3 +45,8 @@ grep -rin "5.2.4 SP6-170502" * | awk -F: '{print $1}'  | xargs sed -i "s/5.2.4 S
 
 # Fuzzy matching
 cat /proc/kallsyms | grep "font.*8x"
+
+cat /proc/cpuinfo | grep -e "cpu cores"  -e "siblings" | sort | uniq
+
+# RSS
+egrep 'CPU|enp' /proc/interrupts
