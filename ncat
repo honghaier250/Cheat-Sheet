@@ -34,3 +34,6 @@ ncat -lk -p 443 --sh-exec "cat tunnel_rep.dat"
 
 # Echo server
 ncat -l 2000 -k -c 'xargs -n1 echo'
+
+# start proxy
+ncat -l 3128 --proxy-type http

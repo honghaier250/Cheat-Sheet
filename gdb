@@ -56,3 +56,5 @@ set $name=value
 set target-async 1
 set pagination off
 set non-stop on
+
+p /u *(char *)(&ip->ip_src.s_addr)@4

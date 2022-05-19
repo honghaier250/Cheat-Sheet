@@ -23,3 +23,7 @@ mount -f -t ext3 -o remount,ro /dev/sdb1 /var/log
 
 # To mount smb
 sudo mount -t cifs //debian.koal.com/upload/hehongjie /home/honghaier/Downloads/Tools
+
+# [Write For NTFS](https://omghowto.com/best-ntfs-apps-for-macos.html)
+sudo umount /Volumes/NAME
+sudo mount -t ntfs -o rw,auto,nobrowse /dev/disk3s1 ~/ntfs-volume

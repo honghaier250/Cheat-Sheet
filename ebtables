@@ -1,0 +1,24 @@
+# trace
+sudo ebtables -t broute -A BROUTING -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:broute:BROUTING" -j ACCEPT
+sudo ebtables -t filter -A INPUT -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:INPUT" -j ACCEPT
+sudo ebtables -t filter -A FORWARD -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:FORWARD" -j ACCEPT
+sudo ebtables -t filter -A OUTPUT -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:OUTPUT" -j ACCEPT
+sudo ebtables -t nat -A PREROUTING -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:PREROUTING" -j ACCEPT
+sudo ebtables -t nat -A OUTPUT -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:OUTPUT"  -j ACCEPT
+sudo ebtables -t nat -A POSTROUTING -p ipv4 --ip-proto 1 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:POSTROUTING" -j ACCEPT
+
+sudo ebtables -t broute -A BROUTING -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:broute:BROUTING" -j ACCEPT
+sudo ebtables -t filter -A INPUT -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:INPUT" -j ACCEPT
+sudo ebtables -t filter -A FORWARD -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:FORWARD" -j ACCEPT
+sudo ebtables -t filter -A OUTPUT -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:OUTPUT" -j ACCEPT
+sudo ebtables -t nat -A PREROUTING -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:PREROUTING" -j ACCEPT
+sudo ebtables -t nat -A OUTPUT -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:OUTPUT"  -j ACCEPT
+sudo ebtables -t nat -A POSTROUTING -p ipv4 --ip-proto TCP --ip-destination-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:POSTROUTING" -j ACCEPT
+
+sudo ebtables -t broute -A BROUTING -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:broute:BROUTING" -j ACCEPT
+sudo ebtables -t filter -A INPUT -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:INPUT" -j ACCEPT
+sudo ebtables -t filter -A FORWARD -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:FORWARD" -j ACCEPT
+sudo ebtables -t filter -A OUTPUT -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:filter:OUTPUT" -j ACCEPT
+sudo ebtables -t nat -A PREROUTING -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:PREROUTING" -j ACCEPT
+sudo ebtables -t nat -A OUTPUT -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:OUTPUT"  -j ACCEPT
+sudo ebtables -t nat -A POSTROUTING -p ipv4 --ip-proto TCP --ip-source-port 9876 --log-level 6 --log-ip --log-prefix "TRACE: eb:nat:POSTROUTING" -j ACCEPT

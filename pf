@@ -1,0 +1,5 @@
+i# snat
+https://openvpn.net/cloud-docs/enabling-routing-nat-on-macos/
+
+sysctl -w net.inet.ip.forwarding=1
+sudo pfctl -f pf-nat.conf -e

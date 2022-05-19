@@ -1,0 +1,12 @@
+sudo ulimit -n 819200
+sudo ulimit -i 819200
+
+sudo sysctl -w net.core.somaxconn=65535
+sudo sysctl -w net.ipv4.ip_local_port_range="1025    65535"
+sudo sysctl -w net.ipv4.tcp_tw_reuse=1
+sudo sysctl -w net.ipv4.tcp_tw_recycle=1
+sudo sysctl -w net.ipv4.tcp_fin_timeout=1
+sudo sysctl -w net.netfilter.nf_conntrack_max=2097152
+sudo sysctl -w fs.file-max=1622794
+
+wrk -t30 -c30 -d60s  --timeout 5s https://10.0.80.195/ --latency

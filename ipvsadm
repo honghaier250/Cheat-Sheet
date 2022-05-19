@@ -1,0 +1,27 @@
+# List
+ipvsadm -Ln
+
+ipvsadm -Ln --stats | --rate
+
+# nat
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -C
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -A -t 192.168.1.250:80 -s wrr
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -a -t 192.168.1.250:80 -r 192.168.1.100:80 -m -w 1
+
+# fullnat
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -C
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm --add-laddr -z 192.168.1.249 -F vEth0
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -A -t 192.168.1.250:80 -s wrr -z 192.168.1.249
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -a -t 192.168.1.250:80 -r 192.168.1.100:80 -b -z 192.168.1.249
+
+# proxy
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -C
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -A -t 192.168.1.250:80 -s wrr
+sudo /home/vagrant/workspace/ad/f-stack/tools/sbin/ipvsadm -a -t 192.168.1.250:80 -r 192.168.1.100:80 -y -w 1
+
+stream {
+  server {
+    listen       80;
+    proxy_pass   $ipvs_fwd_addr:$ipvs_fwd_port;
+  }
+}

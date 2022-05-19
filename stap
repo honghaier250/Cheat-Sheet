@@ -1,0 +1,1 @@
+stap -g -e 'probe kernel.function("devmem_is_allowed").return { $return = 1 }'

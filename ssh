@@ -1,3 +1,4 @@
+# [Proxytunnel](https://blog.cppse.nl/apache-proxytunnel-ssh-tunnel)
 # To ssh via pem file (which normally needs 0600 permissions):
 ssh -i /path/to/file.pem user@example.com
 
@@ -50,6 +51,14 @@ ssh -f -N -L :8080:192.168.190.7:80 -p 60022 ssl@10.0.109.120
 ssh -f -N -L :60022:192.168.80.197:22 root@192.168.80.197
 scp -P 60022 NRPHelper.php root@192.168.192.1:~/
 ssh -f -N -L 10.0.1.80:8443:10.0.80.195:80 honghaier@10.0.80.195
+
+# localhost proxy
+ssh -f -N -L :30001:127.0.0.1:22 admin@127.0.0.1
+
+# Remote Tunnel
+# GatewayPorts yes
+ssh -o GatewayPorts=true -f -N -R :2222:10.20.1.7:22 honghaier@10.0.80.195
+ssh -p 2222 root@10.0.80.195
 
 # Tun Tunnel
 sudo sshd -f /etc/ssh/sshd_config -o "PermitRootLogin=yes" -o "PermitTunnel=yes" -o "ServerAliveInterval=30"

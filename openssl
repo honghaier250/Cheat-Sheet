@@ -170,3 +170,5 @@ awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++}
              /---END CERTIFICATE-----/{inc=0}'
 
  -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
+
+openssl s_client -gmvpn -connect 127.0.0.1:443

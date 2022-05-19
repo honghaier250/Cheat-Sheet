@@ -1,2 +1,20 @@
 - [Socat-fu lesson](https://www.pentestpartners.com/security-blog/socat-fu-lesson/)
 - [tips & tricks](https://gist.github.com/fsodogandji/8521333)
+- [examples](https://github.com/craSH/socat/blob/master/EXAMPLES)
+
+# ssh over ssl
+socat -v tcp4-listen:9000,reuseaddr,fork ssl:10.0.80.195:50443,verify=0,cert=./person.pem
+ssh -p 9000 10.0.80.195
+
+# ssl server and client
+socat openssl-listen:4433,reuseaddr,cert=$HOME/etc/server.pem,cafile=$HOME/etc/client.crt echo
+socat stdio openssl-connect:server.domain.org:4433,cert=$HOME/etc/client.pem,cafile=$HOME/etc/server.crt
+
+socat openssl-listen:4433,pf=ip6,reuseaddr,cert=$HOME/etc/server.pem,cafile=$HOME/etc/client.crt echo
+socat stdio openssl-connect:ip6name.domain.org:4433,cert=$HOME/etc/client.pem,cafile=$HOME/etc/server.crt
+
+~/Downloads/socat tcp4-listen:9000,reuseaddr,fork ssl:oa.avic.com:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.129.81.247:22"
+socat tcp4-listen:9000,reuseaddr,fork exec:'openssl s_client -connect sso.avic.com\:34402 -cert client.pem -key client.key -servername "tcp://10.129.81.247:22"'
+
+~/Downloads/socat tcp4-listen:9000,reuseaddr,fork ssl:36.112.111.69:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.128.0.54:60443"
+~/Downloads/socat tcp4-listen:9000,reuseaddr,fork ssl:36.112.111.38:34402,verify=0,cert=./client.pem,key=./client.key,snihost="tcp://10.129.81.182:60443"

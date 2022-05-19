@@ -1,0 +1,3 @@
+redis-cli -h r-2zer8wyz5f1poukzqj.redis.rds.aliyuncs.com -p 6379 -a 1qaz@WSX
+
+get trp:auth:8f07312e53034034b0fd494b7a95803b:756cca1571284d1b871df52d55d10600

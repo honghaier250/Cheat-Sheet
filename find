@@ -64,3 +64,6 @@ find /basedir -type f -name '*.txt' -exec sh -c 'some code here' sh {} +
 find . ! -name file10.txt -delete
 
 find /kssl -user root
+
+find ~ \( -iname 'jpeg' -o -iname 'jpg' \)
+find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type f

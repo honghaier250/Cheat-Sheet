@@ -7,3 +7,5 @@ sudo sysctl -w  net.inet.ip.forwarding=1
 
 # nat for lo
 sudo sysctl -w net.ipv4.conf.eth0.route_localnet=1
+
+sudo sysctl -n hw.ncpu

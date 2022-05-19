@@ -1,0 +1,8 @@
+# [Remote Login]()
+pkg install openssh
+
+# [Internal and external storage](https://wiki.termux.com/wiki/Internal_and_external_storage)
+termux-setup-storage
+
+pkg install proot
+termux-chroot
