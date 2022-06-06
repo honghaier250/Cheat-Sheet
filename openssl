@@ -78,6 +78,37 @@ openssl x509 -in site_cert.pem -pubkey -noout > site_pubkey.key
 openssl ca -revoke newcert.pem -keyfile demoCA/private/cakey.pem -passin pass:"123456" -cert demoCA/cacert.pem
 openssl ca -gencrl -utf8 -keyfile demoCA/private/cakey.pem -passin pass:"123456" -cert demoCA/cacert.pem -out newcrl.pem
 
+# ocsp
+# https://www.openssl.org/docs/man1.0.2/man5/x509v3_config.html
+
+mkdir -p demoCA/newcerts
+touch demoCA/index.txt
+echo "00" > demoCA/serial
+
+# Create a new key for the CA
+openssl req -new -x509 -extensions v3_ca -keyout ca.key -out ca.pem -days 3650
+
+# Create a new key and CSR for the OCSP
+openssl req -new -nodes -out ocsp.csr -keyout ocsp.key
+
+# Sign the OCSP CSR with the CA key
+openssl ca -in ocsp.csr -out ocsp.pem -keyfile ca.key -cert ca.pem
+
+# Generate a client key and CSR
+openssl req -new -nodes -out client.csr -keyout client.key
+
+# Sign the client CSR with the CA key
+openssl ca -in client.csr -out client.pem -keyfile ca.key -cert ca.pem
+
+# Start the OCSP responder
+openssl ocsp -index ./demoCA/index.txt -port 9999 -rsigner ocsp.pem -rkey ocsp.key -CA ca.pem -text -out /tmp/ocsp.log
+
+# Validate the client certificate
+openssl ocsp -CAfile ca.pem -issuer ca.pem -cert client.pem -url http://localhost:9999 -resp_text -noverify
+
+# Validate the client certificate after revocation
+openssl ca -revoke client.pem -keyfile ca.key -cert ca.pem
+
 # extract certificate req
 openssl x509 -x509toreq -in site_cert.pem -out site_cert.req -signkey site_prikey.key -passin pass:"123456"
 
@@ -92,6 +123,9 @@ openssl verify -CAfile certself.pem certuser.pem
 # ssl handshake
 openssl s_server -accept 2009 -key server_prikey.key -cert server_cert.pem
 openssl s_client -connect 192.168.41.122:443 -key ca.key -cert ca.pem -state -reconnect
+
+openssl s_server -nocert -gmvpn -accept 9999 -xcert sm2.pem -xkey sm2.key -xcert sm2.pem -xkey sm2.key -xcert sm2_enc.pem -xkey sm2_enc.key -CAfile ca/sm2-ca.pem
+openssl s_client -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-enc.pem -xkey sm2-user-enc.key -gmvpn --cipher ECC-SM4-SM3 -connect 10.0.80.195:9999
 
 # TrustRoot
 LANG=en_US.UTF8 /usr/local/ssl/bin/openssl genrsa -out TrustRoot.key -sm4 -passout auto: 2048
@@ -145,7 +179,6 @@ openssl x509 -x509toreq -in fd.crt -out fd.csr -signkey fd.key
 
 # training
 https://www.feistyduck.com/training/the-best-ssl-and-tls-training-in-the-world
-
 # Mozilla可信证书库及相关工具
 https://hg.mozilla.org/mozilla-central/raw-file/tip/security/nss/lib/ckfw/builtins/certdata.txt
 https://curl.haxx.se/docs/caextract.html
@@ -181,15 +214,30 @@ https://www.ssleye.com/self_sign.html
 openssl speed -engine ./engine_sd.so -elapsed rand
 openssl speed -elapsed rand
 
-# ocsp
-openssl ocsp -validity_period 300 -CAfile ca.pem -issuer subca.pem -cert mysite.pem -url http://10.0.100.158:3019
-
+# asn1parse
 openssl asn1parse -inform DER -offset 768003 -in qr-code-final.png
 
-/usr/local/kssl/1.1/bin/openssl s_server -nocert -gmvpn -accept 9999 -xcert sm2.pem -xkey sm2.key -xcert sm2.pem -xkey sm2.key -xcert sm2_enc.pem -xkey sm2_enc.key -CAfile ca/sm2-ca.pem
-/usr/local/kssl/1.1/bin/openssl s_client -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-sig.pem -xkey sm2-user-sig.key -xcert sm2-user-enc.pem -xkey sm2-user-enc.key -gmvpn --cipher ECC-SM4-SM3 -connect 10.0.80.195:9999
+# ocsp
+## Create a new key for the CA
+openssl req -new -x509 -config openssl.cnf -extensions v3_ca -keyout ca.key -out ca.pem -days 3650
 
-openssl pkcs12 -export -inkey mysite.key -in mysite.pem -nodes -out mysite.p12  (输出不带口令的p12证书)
-或 openssl pkcs12 -export -inkey mysite.key -in mysite.pem -passout pass:123456 -out mysite.p12  (输出带口令的p12证书)
-或 openssl pkcs12 -export -inkey mysite.key -in mysite.pem -passin pass:123456 -passout pass:123456 -out mysite.p12  (私钥带密码的情况)
+## Create a new key and CSR for the OCSP
+openssl req -new -nodes -out ocsp.csr -keyout ocsp.key
 
+## Sign the OCSP CSR with the CA key
+openssl ca -in ocsp.csr -out ocsp.pem -keyfile ca.key -cert ca.pem
+
+## Generate a client key and CSR
+openssl req -new -nodes -out client.csr -keyout client.key
+
+## Sign the client CSR with the CA key
+openssl ca -in client.csr -out client.pem -keyfile ca.key -cert ca.pem
+
+## Start the OCSP responder
+openssl ocsp -index ./demoCA/index.txt -port 9999 -rsigner ocsp.pem -rkey ocsp.key -CA ca.pem -text -out /tmp/ocsp.log
+
+## Validate the client certificate
+openssl ocsp -CAfile ca.pem -issuer ca.pem -cert client.pem -url http://localhost:9999 -resp_text -noverify
+
+## Validate the client certificate after revocation
+openssl ca -revoke client.pem -keyfile ca.key -cert ca.pem

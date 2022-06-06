@@ -27,3 +27,15 @@ sudo tshark -i any -f 'tcp port 61001' -Y 'http.request || http.response' -V
 
 # tshark with rotating capture files
 sudo tshark -a filesize:10000 -b files:20 -i < INTERFACE > -w < BASE_FILE_NAME.pcapng >
+
+# Find all cipher suites as selected by the server
+sudo tshark -r some.pcap -Tfields -e ssl.handshake.ciphersuite -Y ssl.handshake.type==2
+
+# Configure keylogfile
+sudo tshark -ossl.keylog file:firefox.keys -r firefox.pcapng.gz
+
+# Configure RSA keyfile (fields correspond to the RSA keys dialog):
+sudo tshark -ouat:ssl keys:’"","","","keys/rsasnakeoil2.key",""’
+
+# Specify script
+sudo tshark -i run0 -y IEEE802_11_RADIO -q -Xlua_script:ieee80211.lua

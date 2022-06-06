@@ -29,6 +29,9 @@ http://yikun.github.io/2014/03/13/nginxstart/
 # Performance Test
 https://www.nginx.com/blog/testing-performance-nginx-ingress-controller-kubernetes/
 
+# SSL Performance Testing for Nginx
+https://www.sobyte.net/post/2022-04/nginx-ssl-test/
+
 https://dropbox.tech/infrastructure/optimizing-web-servers-for-high-throughput-and-low-latency
 
 https://www.nginx.com/blog/optimizing-web-servers-for-high-throughput-and-low-latency/

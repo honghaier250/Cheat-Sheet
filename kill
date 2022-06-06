@@ -11,5 +11,6 @@ kill $(ps -A -ostat,ppid | awk '/[zZ]/ && !a[$2]++ {print $2}')
 # Pause/Resume a process
 kill -SIGSTOP `pgrep crond`
 kill -SIGCONT `pgrep crond`
+kill -9 `pidof nginx | tr " " " "`
 
 exec killall -STOP -u user1
