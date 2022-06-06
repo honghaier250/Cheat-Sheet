@@ -1,0 +1,5 @@
+sudo networksetup -setautoproxyurl "Wi-Fi" "http://10.0.80.195:2233/proxy.pac"
+sudo networksetup -setautoproxystate Wi-Fi on
+
+sudo networksetup -setsocksfirewallproxy "Wi-Fi" 10.0.80.219 1080
+sudo networksetup -setsocksfirewallproxystate "Wi-Fi" off

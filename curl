@@ -1,3 +1,4 @@
+# [ciphers](https://github.com/curl/curl/blob/13ef623a81736e95da1cc1d13a02dd78e228adee/docs/CIPHERS.md)
 # Download a single file
 curl http://path.to.the/file
 
@@ -67,6 +68,7 @@ curl -kvl --cert mysite.pem --key mysite.key https://mail.koal.com/
 # Get internet ip
 curl ipinfo.io
 curl -L tool.lu/ip
+curl -s -L http://whatismyip.systutorials.com/myip/
 
 # Speedtest
 curl -s dl.getipaddr.net/speedtest.sh
@@ -78,6 +80,14 @@ curl -m 5  --speed-time 5 --speed-limit 1
 curl -w "Connection Time: %{time_connect}\n First Byte Transfer: %{time_starttransfer}\n Download Time: %{time_total} (sec)\n Download Speed: %{speed_download} (bps)\n" http://10.0.1.8/
 
 curl -6 -g -0 --interface fd82:b34f:cc99:0:64d3:d0cd:c577:cd90 -vkl https://\[fd82:b34f:cc99:0:a00:27ff:fe8a:5093\]/
+
+curl -x socks5h://10.0.90.55:1080 -kv https://www.google.com.hk | w3m -T text/html
+
+# CardNo
+curl -vkl http://apis.juhe.cn/idcard/index\?key\=2df771f834019c6d0d34520b04159064\&cardno\=
+
+# PhotoNo
+curl -vkl http://apis.juhe.cn/mobile/get\?key\=686418010e4c0a2e1c823e210016283c\&phone\=
 
 # POST with a data file
 curl -d "@data.json" -X POST http://localhost:3000/data

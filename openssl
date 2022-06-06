@@ -204,6 +204,8 @@ awk -v c=-1 '/-----BEGIN CERTIFICATE-----/{inc=1;c++}
 
  -subj "/C=GB/ST=London/L=London/O=Global Security/OU=IT Department/CN=example.com"
 
+openssl s_client -gmvpn -connect 127.0.0.1:443
+
 # use openssl s_server as a reverse proxy
 exec 3<> /dev/tcp/10.0.109.80/8080; /usr/local/ssl/bin/openssl s_server -accept 34402 -cert rsa_sig.pem -key rsa_sig.key -CApath ./ -quiet <&3 >&3
 

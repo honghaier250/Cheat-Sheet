@@ -33,4 +33,7 @@ top -n 1 -b > file.txt
 # NRP
 top -p `pidof NRPd | tr " " ","`
 
+# Only CPU
+top -b -d1 -n1 | grep Cpu
+
 top -H -p `pidof java`

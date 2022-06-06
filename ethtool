@@ -3,6 +3,7 @@
 ethtool -s eth0 speed 100 duplex full
 
 # light specify interface
+ethtool -p eth0 20
 ethtool --identify eth0 20
 
 # interrupt coalescing

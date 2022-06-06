@@ -26,5 +26,9 @@ mount -f -t ext3 -o remount,ro /dev/sdb1 /var/log
 # sudo apt-get install cifs-utils
 sudo mount -t cifs //debian.koal.com/upload/hehongjie /home/honghaier/Downloads/Tools
 
+# [Write For NTFS](https://omghowto.com/best-ntfs-apps-for-macos.html)
+sudo umount /Volumes/NAME
+sudo mount -t ntfs -o rw,auto,nobrowse /dev/disk3s1 ~/ntfs-volume
+
 sudo mount -o rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2 /dev/sda3 /media/honghaier/6AB03092B030672B
 sudo mount -o rw,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other,blksize=4096,uhelper=udisks2 /dev/sda3 /media/honghaier/709035F99035C67E

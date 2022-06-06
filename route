@@ -27,3 +27,8 @@ route add -net 10.0.0.0 netmask 255.0.0.0 reject
 
 # This is an obscure one documented so people know how to do it. This sets all of the class D (multicast) IP routes to go via "eth0". This is the correct normal configuration line with a multicasting kernel
 route add -net 224.0.0.0 netmask 240.0.0.0 dev eth0
+
+# mac
+sudo route -n delete default
+
+sudo route add -net 0.0.0.0 192.168.1.1

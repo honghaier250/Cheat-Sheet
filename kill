@@ -13,4 +13,6 @@ kill -SIGSTOP `pgrep crond`
 kill -SIGCONT `pgrep crond`
 kill -9 `pidof nginx | tr " " " "`
 
+kill `pidof mosh-server`
+
 exec killall -STOP -u user1

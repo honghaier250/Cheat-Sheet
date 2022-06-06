@@ -65,5 +65,8 @@ find . ! -name file10.txt -delete
 
 find /kssl -user root
 
+find ~ \( -iname 'jpeg' -o -iname 'jpg' \)
+find ~ \( -iname '*jpeg' -o -iname '*jpg' \) -type f
+
 # To find recently installed packages
 sudo find /usr/sbin -cmin -30

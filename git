@@ -6,6 +6,8 @@ git config --global user.email hehj@koal.com
 #git config --global credential.helper store
 git config --global credential.helper cache
 git config --global http.sslVerify false
+git config --global https.proxy http://127.0.0.1:1080
+git config --global --unset https.proxy
 git config --global help.autocorrect 1
 
 # To set your editor:

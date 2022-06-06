@@ -27,6 +27,13 @@ sudo apt list --installed
 
 sudo apt purge --autoremove "linux-*4.15.0-58*"
 
+<<<<<<< HEAD
+# List download url
+sudo apt download --print-uris libpcre3-dev
+
+# list package name
+sudo apt-cache show libpcre32-3
+=======
 # Print url
 sudo apt-get install --print-uris -y package-name
 
@@ -42,3 +49,4 @@ https://linzhanyu.github.io/linux/2020/04/15/apt-mark.html
 
 # download package
 apt --download-only -o Dir::Cache="./" -o Dir::Cache::archives="./" install libgd-dev
+>>>>>>> f652b38a51968277fd4a82ffd7aca35384b1a767

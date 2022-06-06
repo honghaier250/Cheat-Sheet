@@ -3,6 +3,9 @@
 https://nginx.org/packages/
 http://nginx.org/download/
 
+# API
+https://www.nginx.com/resources/wiki/extending/api/
+
 # Debug configure
 # https://docs.nginx.com/nginx/admin-guide/monitoring/debugging/
 # https://www.nginx.com/resources/wiki/start/topics/tutorials/debugging/
@@ -25,6 +28,9 @@ https://code.google.com/archive/p/nginxsrp/wikis/NginxCodeReview.wiki#ngx_hash
 
 https://ivanzz1001.github.io/records/categories/#nginx
 http://yikun.github.io/2014/03/13/nginxstart/
+
+# api
+https://www.nginx.com/resources/wiki/extending/api
 
 # Performance Test
 https://www.nginx.com/blog/testing-performance-nginx-ingress-controller-kubernetes/

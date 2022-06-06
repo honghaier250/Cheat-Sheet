@@ -54,6 +54,9 @@ sudo docker tag git.koal.com:4567/gw-cloud/docker/trp:runit-amd64 git.koal.com:4
 # rename container
 sudo docker rename xxx xxx1
 
+# remove all images
+sudo docker images | awk  '{print $3}' | xargs sudo docker image rm
+
 sudo docker run --env HTTP_PROXY="https://10.0.80.195:8118" x11docker/deepin
 
 # restart on boot
